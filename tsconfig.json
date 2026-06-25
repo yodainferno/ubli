@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/", // куда компилим (не важно - так как собираем webpack)
+    "noImplicitAny": true, // запрет на использование переменных без явного указания типа
+    "module": "ESNext", // модульная система (ESNuxt, es6, commonJs - для бэка)
+    "target": "es5", // версия в которую компилим
+    "jsx": "react", // поддержка jsx
+    "allowJs": true, // позволяет иметь js
+    "moduleResolution": "node", // какие импорты будут (node 95%, и classic)
+    "esModuleInterop": true, // позволяет работать с пакетами exports/requiore (commonJs) через import/export
+    "allowSyntheticDefaultImports": true, // переводить все именованные экспорты в дефолтный (чтобы не делать import * as ...)
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}
