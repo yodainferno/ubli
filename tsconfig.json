@@ -4,7 +4,7 @@
     "noImplicitAny": true, // запрет на использование переменных без явного указания типа
     "module": "ESNext", // модульная система (ESNuxt, es6, commonJs - для бэка)
     "target": "es5", // версия в которую компилим
-    "jsx": "react", // поддержка jsx
+    "jsx": "react-jsx", // поддержка jsx
     "allowJs": true, // позволяет иметь js
     "moduleResolution": "node", // какие импорты будут (node 95%, и classic)
     "esModuleInterop": true, // позволяет работать с пакетами exports/requiore (commonJs) через import/export
