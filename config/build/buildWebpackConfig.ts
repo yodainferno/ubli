@@ -20,12 +20,12 @@ export function buildWebpackConfig(option: BuildOptions): webpack.Configuration 
         module: {
             rules: buildLoaders(option),
         },
-        resolve: buildResolvers(),
+        resolve: buildResolvers(option),
 
         // чтобы понять где ошибка - так как при сборке всё сжимается в 1 js-файл,
         // не показывать для prod сборки
         devtool: isDev ? 'inline-source-map' : undefined,
-        
+
         devServer: isDev ? buildDevServer(option) : undefined,
     }
 }
