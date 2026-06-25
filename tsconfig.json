@@ -9,6 +9,7 @@
     "moduleResolution": "node", // какие импорты будут (node 95%, и classic)
     "esModuleInterop": true, // позволяет работать с пакетами exports/requiore (commonJs) через import/export
     "allowSyntheticDefaultImports": true, // переводить все именованные экспорты в дефолтный (чтобы не делать import * as ...)
+    "baseUrl": "."
   },
   "ts-node": {
     "compilerOptions": {
