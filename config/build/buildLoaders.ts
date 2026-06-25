@@ -1,7 +1,10 @@
 import webpack from 'webpack'
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import {BuildOptions} from "./types/config";
 
 // лоадеры - они описывают как обрабатывать файлы за рамками JS
-export function buildLoaders(): webpack.RuleSetRule[] {
+export function buildLoaders({isDev}: BuildOptions): webpack.RuleSetRule[] {
+
     // лоадер для TS
     // уже умеет работать с JSX
     const tsLoader = {
@@ -13,10 +16,23 @@ export function buildLoaders(): webpack.RuleSetRule[] {
     const cssLoaders = {
         test: /\.s[ac]ss$/i,
         use: [
-            // Creates `style` nodes from JS strings
-            "style-loader",
+            isDev
+                ? "style-loader"  // Creates `style` nodes from JS strings
+                : MiniCssExtractPlugin.loader, // позволит вынести css как css-файлы а не в js
+
             // Translates CSS into CommonJS
-            "css-loader",
+            {
+                loader: "css-loader",
+                options: {
+                    modules: {
+                        auto: (resPath: string) => resPath.includes(".module."),
+                        localIdentName: isDev
+                            ? '[path]_[name]__[local]'
+                            : '[hash:base64:8]',
+                    },
+                }
+            },
+
             // Compiles Sass to CSS
             "sass-loader",
         ],
