@@ -1,0 +1,15 @@
+.NavBar {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 8px;
+
+  background: var(--inverted-bg-color);
+}
+
+.NavBarItems {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
