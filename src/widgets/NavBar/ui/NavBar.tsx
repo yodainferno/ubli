@@ -17,7 +17,6 @@ export const NavBar = ({className}: NavBarProps) => {
                 <AppLink to={'/'} theme={AppLinkTheme.INVERTED}>Главная</AppLink>
                 <AppLink to={'/about'} theme={AppLinkTheme.INVERTED}>О нас</AppLink>
             </div>
-            <ThemeSwitcher />
         </div>
     );
 };

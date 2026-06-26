@@ -19,7 +19,7 @@ export const Button: FC<ButtonProps> = (props) => {
         ...otherProps
     } = props;
 
-    console.log(cls)
+    console.log(cls )
 
     return (
         <button
