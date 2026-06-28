@@ -4,8 +4,9 @@ module.exports = {
         es2021: true,
     },
     extends: [
-        "standard-with-typescript",
-        "plugin:react/recommended"
+        'plugin:react/recommended',
+        'airbnb',
+        'plugin:i18next/recommended',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -18,11 +19,12 @@ module.exports = {
     plugins: [
         'react',
         '@typescript-eslint',
+        'i18next',
     ],
     rules: {
-        'react/jsx-indent': [2, 2],
-        'react/jsx-indent-props': [2, 2],
-        indent: [2, 2],
+        'react/jsx-indent': [2, 4],
+        'react/jsx-indent-props': [2, 4],
+        indent: [2, 4],
         'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.tsx'] }],
         'import/no-unresolved': 'off',
         'import/prefer-default-export': 'off',
@@ -34,12 +36,10 @@ module.exports = {
         'no-shadow': 'off',
         'import/extensions': 'off',
         'import/no-extraneous-dependencies': 'off',
-        '@typescript-eslint/naming-convention': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/strict-boolean-expressions': 'off',
+        'no-underscore-dangle': 'off',
+        'i18next/no-literal-string': ['error', { markupOnly: true }],
     },
     globals: {
         __IS_DEV__: true,
     },
 };
-
