@@ -1,50 +1,62 @@
-import webpack from 'webpack'
+import webpack from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BuildOptions} from "./types/config";
 
-// лоадеры - они описывают как обрабатывать файлы за рамками JS
 export function buildLoaders({isDev}: BuildOptions): webpack.RuleSetRule[] {
 
-    // лоадер для TS
-    // уже умеет работать с JSX
-    const tsLoader = {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-    };
+    const svgLoader = {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+    }
 
-    const cssLoaders = {
+    const babelLoader = {
+        test: /\.(js|jsx|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+            loader: "babel-loader",
+            options: {
+                presets: ['@babel/preset-env'],
+                "plugins": [
+                    [
+                        "i18next-extract",
+                        {
+                            locales: ['ru', 'en'],
+                            keyAsDefaultValue: true
+                        }
+                    ],
+                ]
+            }
+        }
+    }
+
+    const cssLoader = {
         test: /\.s[ac]ss$/i,
         use: [
-            isDev
-                ? "style-loader"  // Creates `style` nodes from JS strings
-                : MiniCssExtractPlugin.loader, // позволит вынести css как css-файлы а не в js
-
-            // Translates CSS into CommonJS
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             {
                 loader: "css-loader",
                 options: {
                     modules: {
-                        auto: (resPath: string) => resPath.includes(".module."),
+                        auto: (resPath: string) => Boolean(resPath.includes('.module.')),
                         localIdentName: isDev
-                            ? '[path]_[name]__[local]'
-                            : '[hash:base64:8]',
+                            ? '[path][name]__[local]--[hash:base64:5]'
+                            : '[hash:base64:8]'
                     },
                 }
             },
-
-            // Compiles Sass to CSS
             "sass-loader",
         ],
-    };
+    }
 
-    const svgLoader = {
-        test: /\.svg$/i,
-        use: ['@svgr/webpack'],
+    // Если не используем тайпскрипт - нужен babel-loader
+    const typescriptLoader = {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
     }
 
     const fileLoader = {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|woff2|woff)$/i,
         use: [
             {
                 loader: 'file-loader',
@@ -52,10 +64,11 @@ export function buildLoaders({isDev}: BuildOptions): webpack.RuleSetRule[] {
         ],
     }
 
-    return [ // порядок важен
-        tsLoader,
-        cssLoaders,
+    return [
+        fileLoader,
         svgLoader,
-        fileLoader
+        babelLoader,
+        typescriptLoader,
+        cssLoader,
     ]
 }
