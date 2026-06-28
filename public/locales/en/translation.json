@@ -1,4 +1,9 @@
 {
   "title": "My app",
-  "translate": "Translate"
+  "translate": "Translate",
+  "loading": "Loading...",
+  "main": "Main",
+  "about": "About",
+  "toggle": "Toggle",
+  "themeIcon": "Theme icon"
 }
