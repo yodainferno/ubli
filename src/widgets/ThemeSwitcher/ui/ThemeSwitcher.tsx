@@ -22,7 +22,14 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
             theme={ThemeButton.CLEAR}
         >
             {theme === Theme.DARK
-                ? <img src={DarkIcon} width={20} height={20} alt={t('themeIcon')} />
+                ? (
+                    <img
+                        src={DarkIcon}
+                        width={20}
+                        height={20}
+                        alt={t('themeIcon')}
+                    />
+                )
                 : <LightIcon width={20} height={20} />}
         </Button>
     );

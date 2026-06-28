@@ -1,4 +1,10 @@
 {
+  "about": "about",
+  "loading": "loading",
+  "main": "main",
+  "notFound": "notFound",
+  "themeIcon": "themeIcon",
   "title": "title",
+  "toggle": "toggle",
   "translate": "translate"
 }
