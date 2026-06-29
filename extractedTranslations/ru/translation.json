@@ -3,6 +3,8 @@
   "loading": "loading",
   "main": "main",
   "notFound": "notFound",
+  "reload": "reload",
+  "someError": "someError",
   "themeIcon": "themeIcon",
   "title": "title",
   "toggle": "toggle",

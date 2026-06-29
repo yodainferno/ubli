@@ -6,5 +6,7 @@
   "about": "About",
   "toggle": "Toggle",
   "themeIcon": "Theme icon",
-  "notFound": "Not found"
+  "notFound": "Not found",
+  "reload": "reload",
+  "someError": "An error has occurred("
 }
