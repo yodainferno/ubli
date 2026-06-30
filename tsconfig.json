@@ -28,6 +28,8 @@
   "exclude": [
     "node_modules",
     "**/*.test.ts",
-    "**/*.test.tsx"
+    "**/*.test.tsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx"
   ]
 }

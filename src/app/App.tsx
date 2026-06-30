@@ -3,7 +3,7 @@ import './styles/index.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTheme } from 'app/providers/ThemeProvider';
 import { NavBar } from 'widgets/NavBar';
-import { SideBar } from 'widgets/SideBar';
+import { Sidebar } from 'widgets/Sidebar';
 import AppRouter from 'app/providers/router/ui/AppRouter';
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
             <Suspense fallback="">
                 <NavBar />
                 <div className="content-page">
-                    <SideBar />
+                    <Sidebar />
                     <AppRouter />
                 </div>
             </Suspense>
