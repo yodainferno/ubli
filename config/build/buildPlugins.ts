@@ -7,8 +7,9 @@ import { type BuildOptions } from './types/config';
 export function buildPlugins({
     paths,
     isDev,
+    analyzer,
 }: BuildOptions): webpack.WebpackPluginInstance[] {
-    return [
+    const plugins = [
         new HTMLWebpackPlugin({
             template: paths.html,
         }), // сделает html и через defer подключит все entry скрипты
@@ -21,8 +22,13 @@ export function buildPlugins({
             __IS_DEV__: JSON.stringify(isDev),
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new BundleAnalyzerPlugin({
-            openAnalyzer: false,
-        }),
     ];
+
+    if (analyzer) {
+        plugins.push(new BundleAnalyzerPlugin({
+            openAnalyzer: false,
+        }));
+    }
+
+    return plugins;
 }
