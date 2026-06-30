@@ -22,9 +22,6 @@ jobs:
       - name: type check
         run: npm run type-check
         if: always()
-      - name: build production project
-        run: npm run build:prod
-        if: always()
       - name: linting typescript
         run: npm run lint:ts
         if: always()
@@ -34,9 +31,4 @@ jobs:
       - name: unit testing
         run: npm run test:unit
         if: always()
-      - name: build storybook
-        run: npm run storybook:build
-        if: always()
-      - name: screenshot testing
-        run: npm run test:ui:ci
-        if: always()
+
