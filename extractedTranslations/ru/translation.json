@@ -4,6 +4,7 @@
   "main": "main",
   "notFound": "notFound",
   "reload": "reload",
+  "signIn": "signIn",
   "someError": "someError",
   "themeIcon": "themeIcon",
   "title": "title",

@@ -8,5 +8,6 @@
   "themeIcon": "Theme icon",
   "notFound": "Not found",
   "reload": "reload",
-  "someError": "An error has occurred("
+  "someError": "An error has occurred(",
+  "signIn": "Sign in"
 }
