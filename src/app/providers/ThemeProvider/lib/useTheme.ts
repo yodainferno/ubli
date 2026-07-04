@@ -18,6 +18,7 @@ export function useTheme(): UseThemeResult {
             throw new Error('useTheme must be used within ThemeProvider');
         }
         setTheme(newTheme);
+        document.body.className = newTheme;
         localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
     };
 
