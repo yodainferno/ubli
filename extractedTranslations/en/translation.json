@@ -1,15 +1,21 @@
 {
+  "": "",
   "about": "about",
   "loading": "loading",
   "main": "main",
   "notFound": "notFound",
+  "password": "password",
   "reload": "reload",
   "signIn": "signIn",
   "someError": "someError",
+  "sub": "sub",
+  "submi": "submi",
+  "submit": "submit",
   "themeIcon": "themeIcon",
   "title": "title",
   "toggle": "toggle",
   "translate": "translate",
+  "username": "username",
   "Главная": "",
   "О сайте": ""
 }
