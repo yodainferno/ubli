@@ -56,6 +56,7 @@ export const Input = memo((props: InputProps) => {
         <div className={classNames(cls.inputWrapper, {}, [className])}>
             {
                 label ? (
+                    // eslint-disable-next-line jsx-a11y/label-has-associated-control
                     <label className={cls.label}>
                         <span>{label}</span>
                         {input}
