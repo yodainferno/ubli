@@ -9,3 +9,5 @@ export type {
     User,
     UserSchema,
 } from './model/types/user';
+
+export { getUserAuthData } from 'entities/User/model/selectors/getUserAuthData/getUserAuthData';

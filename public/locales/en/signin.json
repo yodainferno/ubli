@@ -1,5 +1,7 @@
 {
+  "title": "Sign in form",
   "username": "User name",
   "password": "Password",
-  "submit": "Sign in"
+  "submit": "Sign in",
+  "error": "Incorrect login or password"
 }
