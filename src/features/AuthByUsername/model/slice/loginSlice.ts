@@ -1,4 +1,4 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
     createError, createIDLE, createLoading, createSuccess,
 } from 'shared/api/types/apiResponse';
