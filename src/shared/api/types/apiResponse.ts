@@ -18,7 +18,7 @@ export type ApiResponse<T = unknown, E = unknown> =
     SuccessStatus<T> |
     ErrorStatus<E>;
 
-export const createIDLE = (): IdleStatus => ({
+export const createIdle = (): IdleStatus => ({
     type: ResponseStatus.IDLE,
 });
 

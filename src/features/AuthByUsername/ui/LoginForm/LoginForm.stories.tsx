@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
 import LoginForm from './LoginForm';
-import { createError, createIDLE, createLoading } from '../../../../shared/api/types/apiResponse';
+import { createError, createIdle, createLoading } from '../../../../shared/api/types/apiResponse';
 
 export default {
     title: 'features/LoginForm',
@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof LoginForm> = (args) => <LoginForm {...args
 export const Primary = Template.bind({});
 Primary.args = {};
 Primary.decorators = [StoreDecorator({
-    loginForm: { username: '123', password: 'asd', status: createIDLE() },
+    loginForm: { username: '123', password: 'asd', status: createIdle() },
 })];
 
 export const withError = Template.bind({});

@@ -1,6 +1,6 @@
 import { DeepPartial } from '@reduxjs/toolkit';
 import { StateSchema } from 'app/providers/StoreProvider';
-import { createIDLE, ResponseStatus } from 'shared/api/types/apiResponse';
+import { createIdle, ResponseStatus } from 'shared/api/types/apiResponse';
 import { getLoginState } from './getLoginState';
 
 describe('getLoginState.test', () => {
@@ -10,7 +10,7 @@ describe('getLoginState.test', () => {
             loginForm: {
                 username: 'username',
                 password: 'password',
-                status: createIDLE(),
+                status: createIdle(),
             },
         };
         // act

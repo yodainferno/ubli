@@ -2,7 +2,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { Theme, useTheme } from 'app/providers/ThemeProvider';
 
 import LightIcon from 'shared/assets/icons/theme-light.svg';
-import DarkIcon from 'shared/assets/icons/theme-dark.png';
+import DarkIcon from 'shared/assets/icons/theme-dark.svg';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
 import cls from './ThemeSwitcher.module.scss';
@@ -21,16 +21,7 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
             onClick={toggleTheme}
             theme={ButtonTheme.CLEAR}
         >
-            {theme === Theme.DARK
-                ? (
-                    <img
-                        src={DarkIcon}
-                        width={20}
-                        height={20}
-                        alt={t('themeIcon')}
-                    />
-                )
-                : <LightIcon width={20} height={20} />}
+            {theme === Theme.DARK ? <DarkIcon /> : <LightIcon />}
         </Button>
     );
 };

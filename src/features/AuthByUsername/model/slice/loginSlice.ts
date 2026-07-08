@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-    createError, createIDLE, createLoading, createSuccess,
+    createError, createIdle, createLoading, createSuccess,
 } from 'shared/api/types/apiResponse';
 import { loginByUserName } from '../services/loginByUserName/loginByUserName';
 import { LoginSchema } from '../types/loginSchema';
@@ -8,7 +8,7 @@ import { LoginSchema } from '../types/loginSchema';
 const initialState: LoginSchema = {
     username: 'admin',
     password: '123',
-    status: createIDLE(),
+    status: createIdle(),
 };
 export const loginSlice = createSlice({
     name: 'login',
