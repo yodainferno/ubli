@@ -22,7 +22,7 @@ export class TestAsyncThunk<Return, Arg, RejectedValue> {
 
     async calcThunk(arg: Arg) {
         const action = this.actionCreator(arg);
-        const result = await action(this.dispatch, this.getState, { api: axios });
+        const result = await action(this.dispatch, this.getState, { api: axios, navigate: jest.fn() });
         return result;
     }
 }

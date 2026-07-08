@@ -12,4 +12,6 @@ export interface Profile {
     avatar: string,
 }
 
-export type ProfileSchema = ApiResponse<Profile, string>;
+export type ProfileSchema = {
+    data: ApiResponse<Profile, string>,
+}

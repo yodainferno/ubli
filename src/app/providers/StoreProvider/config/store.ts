@@ -5,12 +5,12 @@ import { $api } from 'shared/api/api';
 import type { To } from '@remix-run/router';
 import type { NavigateOptions } from 'react-router/dist/lib/context';
 import { createReducerManager } from './reducerManager';
-import { StateSchema } from './StateSchema';
+import { ReducersList, StateSchema } from './StateSchema';
 
 export function createReduxStore(
     navigate: (to: To, options?: NavigateOptions) => void,
     initialState?: StateSchema,
-    asyncReducers?: ReducersMapObject<StateSchema>,
+    asyncReducers?: ReducersList,
 ) {
     const rootReducers: ReducersMapObject<StateSchema> = {
         ...asyncReducers,
