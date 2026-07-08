@@ -45,7 +45,9 @@ const LoginForm = memo((props: LoginFormProps) => {
     }, [dispatch]);
 
     const onSubmitClick = useCallback(async () => {
-        const result = await dispatch(loginByUserName({ username, password }));
+        const result = await dispatch(
+            loginByUserName({ username, password }),
+        );
         if (result.meta.requestStatus === 'fulfilled') {
             onSuccess?.();
         }

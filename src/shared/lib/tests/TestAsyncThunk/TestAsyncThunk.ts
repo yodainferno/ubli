@@ -1,10 +1,11 @@
 /// <reference types="jest" />
 
-import { StateSchema } from 'app/providers/StoreProvider';
+import { StateSchema, ThunkConfig } from 'app/providers/StoreProvider';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 type ActionCreatorType<Return, Arg, RejectedValue> =
-    (arg: Arg) => AsyncThunkAction<Return, Arg, {rejectValue: RejectedValue}>
+    (arg: Arg) => AsyncThunkAction<Return, Arg, ThunkConfig<RejectedValue>>
 
 export class TestAsyncThunk<Return, Arg, RejectedValue> {
     dispatch: jest.MockedFn<any>;
@@ -21,7 +22,7 @@ export class TestAsyncThunk<Return, Arg, RejectedValue> {
 
     async calcThunk(arg: Arg) {
         const action = this.actionCreator(arg);
-        const result = await action(this.dispatch, this.getState, undefined);
+        const result = await action(this.dispatch, this.getState, { api: axios });
         return result;
     }
 }
