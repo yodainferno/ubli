@@ -1,11 +1,12 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { Modal } from 'shared/ui/Modal/Modal';
 import React, { useCallback, useState } from 'react';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { LoginModal } from 'features/AuthByUsername';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAuthData, userActions } from 'entities/User';
+import { useNavigate } from 'react-router-dom';
+import { AppRouters, RoutePath } from 'shared/config/routeConfig/routeConfig';
 import cls from './NavBar.module.scss';
 
 interface NavBarProps {
@@ -15,6 +16,7 @@ interface NavBarProps {
 export const NavBar = ({ className }: NavBarProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [isAuthModal, setIsAuthModal] = useState(false);
     const onCloseModal = useCallback(() => {
@@ -29,7 +31,8 @@ export const NavBar = ({ className }: NavBarProps) => {
 
     const onLogout = useCallback(() => {
         dispatch(userActions.logout());
-    }, [dispatch]);
+        navigate(RoutePath[AppRouters.MAIN]);
+    }, [dispatch, navigate]);
     if (authData) {
         return (
             <div className={classNames(cls.NavBar, {}, [className])}>
