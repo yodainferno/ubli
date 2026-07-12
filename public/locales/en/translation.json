@@ -10,5 +10,7 @@
   "reload": "reload",
   "someError": "An error has occurred(",
   "signIn": "Sign in",
-  "logOut": "Log out"
+  "logOut": "Log out",
+  "language": "Language",
+  "languageShort": "Lang"
 }

@@ -1,4 +1,16 @@
 {
+  "age": "",
+  "avatar": "",
+  "cancel": "",
+  "city": "",
+  "country": "",
+  "currency": "",
   "edit": "edit",
-  "title": "title"
+  "firstName": "",
+  "lastName": "",
+  "loadErrorText": "",
+  "loadErrorTitle": "",
+  "save": "",
+  "title": "title",
+  "username": ""
 }

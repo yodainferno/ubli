@@ -3,6 +3,8 @@ import { memo, useMemo, useState } from 'react';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { LangSwitcher } from 'widgets/LangSwitcher';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
+import { useSelector } from 'react-redux';
+import { getUserAuthData } from 'entities/User';
 import cls from './Sidebar.module.scss';
 import { SidebarItemsList } from '../../model/items';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -18,13 +20,23 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         setCollapsed((prev) => !prev);
     };
 
-    const itemsList = useMemo(() => SidebarItemsList.map((item) => (
+    const isAuth = useSelector(getUserAuthData);
+
+    const availableItems = useMemo(
+        () => SidebarItemsList.filter(
+            // авторизован или публичная страница
+            (item) => isAuth || !item.authOnly,
+        ),
+        [isAuth],
+    );
+
+    const itemsList = useMemo(() => availableItems.map((item) => (
         <SidebarItem
             item={item}
             collapsed={collapsed}
             key={item.path}
         />
-    )), [collapsed]);
+    )), [availableItems, collapsed]);
 
     return (
         <div

@@ -1,4 +1,16 @@
 {
   "title": "Profile",
-  "edit": "Edit"
+  "edit": "Edit",
+  "cancel": "Cancel",
+  "save": "Save",
+  "username": "Nickname",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "city": "City",
+  "age": "Age",
+  "avatar": "Avatar",
+  "currency": "Currency",
+  "country": "Country",
+  "loadErrorTitle": "An error occurred while loading profile",
+  "loadErrorText": "Try refreshing the page"
 }

@@ -1,68 +1,102 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { getProfileData } from 'entities/Profile/model/selectors/getProfileData/getProfileData';
-import { ResponseStatus } from 'shared/api/types/apiResponse';
-import { Loader } from 'shared/ui/Loader/Loader';
-import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
+import { memo } from 'react';
+import { toNumberWithFallBack } from 'shared/lib/toNumberWithFallBack/toNumberWithFallBack';
+import { Avatar } from 'shared/ui/Avatar/Avatar';
+import { Select } from 'shared/ui/Select/Select';
+import { CurrencySelect } from 'entities/Currency';
+import { CountrySelect } from 'entities/Country';
 import cls from './ProfileCard.module.scss';
+import { Profile } from '../../model/types/profile';
 
 interface ProfileCardProps {
+    data: Profile
     className?: string;
+    readOnly?: boolean
+    onChange?: (value: Profile) => void;
 }
 
-export const ProfileCard = ({ className }: ProfileCardProps) => {
-    const { t } = useTranslation();
+type ProfileKeys = keyof Profile;
 
-    const profileData = useSelector(getProfileData);
+export const ProfileCard = memo((props: ProfileCardProps) => {
+    const { t } = useTranslation('profile');
+    const {
+        className,
+        data,
+        readOnly,
+        onChange,
+    } = props;
 
-    if (profileData.type === ResponseStatus.ERROR) {
-        return (
-            <Text
-                title={t('error')}
-                theme={TextTheme.ERROR}
-            />
-        );
-    }
-    if (profileData.type === ResponseStatus.SUCCESS) {
-        const data = profileData.payload!;
-        return (
-            <div className={classNames(cls.ProfileCard, {}, [className])}>
-                <div className={cls.header}>
-                    <Text
-                        title={t('title', { ns: 'profile' })}
-                    />
-                    <Button theme={ButtonTheme.OUTLINE}>
-                        {t('edit', { ns: 'profile' })}
-                    </Button>
-                </div>
-                <div className={cls.data}>
-                    <Input
-                        label={t('edit', { ns: 'username' })}
-                        value={data.username}
-                        readOnly
-                    />
-                    <Input
-                        label={t('edit', { ns: 'first' })}
-                        value={data.first}
-                        readOnly
-                    />
-                    <Input
-                        label={t('edit', { ns: 'lastname' })}
-                        value={data.lastname}
-                        readOnly
-                    />
+    const onChangeCallBack = (value: unknown, key: ProfileKeys) => {
+        onChange?.({
+            [key]: value,
+        });
+    };
 
-                </div>
-            </div>
-        );
-    }
-
-    // ResponseStatus.LOADING
-    // ResponseStatus.IDLE
     return (
-        <Loader />
+        <div className={classNames(cls.data, {}, [className])}>
+            {
+                data?.avatar && (
+                    <div className={cls.avatarWrapper}>
+                        <Avatar
+                            src={data.avatar}
+                            size={100}
+                        />
+                    </div>
+                )
+            }
+            <Input
+                label={t('username')}
+                value={data.username}
+                readOnly={readOnly}
+                onChange={(value) => onChangeCallBack(value, 'username')}
+            />
+            <Input
+                label={t('firstName')}
+                value={data.first}
+                readOnly={readOnly}
+                onChange={(value) => onChangeCallBack(value, 'first')}
+            />
+            <Input
+                label={t('lastName')}
+                value={data.lastname}
+                readOnly={readOnly}
+                onChange={(value) => onChangeCallBack(value, 'lastname')}
+            />
+
+            <Input
+                label={t('city')}
+                value={data.city}
+                readOnly={readOnly}
+                onChange={(value) => onChangeCallBack(value, 'city')}
+            />
+
+            <Input
+                label={t('age')}
+                value={data.age}
+                readOnly={readOnly}
+                onChange={(value) => onChangeCallBack(toNumberWithFallBack(value, data.age), 'age')}
+            />
+
+            <Input
+                label={t('avatar')}
+                value={data.avatar}
+                readOnly={readOnly}
+                onChange={(value) => onChangeCallBack(value, 'avatar')}
+            />
+
+            <CurrencySelect
+                value={data.currency}
+                onChange={(value) => onChangeCallBack(value, 'currency')}
+                readOnly={readOnly}
+            />
+
+            <CountrySelect
+                value={data.country}
+                onChange={(value) => onChangeCallBack(value, 'country')}
+                readOnly={readOnly}
+            />
+        </div>
     );
-};
+});

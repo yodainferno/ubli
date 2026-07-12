@@ -30,7 +30,5 @@
     "node_modules",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "**/*.stories.ts",
-    "**/*.stories.tsx"
   ]
 }

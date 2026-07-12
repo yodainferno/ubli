@@ -5,5 +5,5 @@ export type {
     ReducersList,
     ThunkExtraArg,
     ThunkConfig,
+    ReduxStoreWithManager,
 } from 'app/providers/StoreProvider/config/StateSchema'; // тип из вышестоящего - исключение FSD
-export { ReduxStoreWithManager } from 'app/providers/StoreProvider/config/StateSchema';

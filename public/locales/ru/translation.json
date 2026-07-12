@@ -10,5 +10,7 @@
   "reload": "Обновить страницу",
   "someError": "Произошла ошибка(",
   "signIn": "Войти",
-  "logOut": "Выйти"
+  "logOut": "Выйти",
+  "language": "Язык",
+  "languageShort": "Короткий язык"
 }

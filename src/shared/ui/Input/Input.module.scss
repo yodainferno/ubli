@@ -5,5 +5,12 @@
 }
 
 .input {
-  padding: 0 4px;
+  padding: 4px 16px;
+}
+
+.readOnly {
+  pointer-events: none;
+  outline: none;
+  border: none;
+  background: #ccf;
 }

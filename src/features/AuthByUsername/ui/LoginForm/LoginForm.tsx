@@ -62,7 +62,7 @@ const LoginForm = memo((props: LoginFormProps) => {
 
                 {status.type === ResponseStatus.ERROR && (
                     <Text
-                        title="!!!"
+                        title={t('errorTitle')}
                         text={t('error')}
                         theme={TextTheme.ERROR}
                     />
