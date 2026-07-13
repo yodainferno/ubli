@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:dev": "concurrently \"npm start\" \"npm run start:dev:server\"",
     "start": "webpack serve --env port=3000",
     "start:dev:server": "node ./json-server/index.js",
     "build:prod": "webpack --env mode=production",
@@ -83,6 +84,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "concurrently": "^7.0.0",
     "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.1",
     "i18next": "^21.6.11",
