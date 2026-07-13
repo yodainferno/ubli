@@ -10,8 +10,8 @@ export enum ValidateProfileError {
 }
 
 export type ProfileSchema = {
-    data: ApiResponse<Profile, string>,
+    data?: ApiResponse<Profile, string>,
     form?: Profile,
-    readonly: boolean,
+    readonly?: boolean,
     validateErrors?: ValidateProfileError[],
 }

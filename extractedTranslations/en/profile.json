@@ -1,4 +1,9 @@
 {
+  "INCORRECT_AGE": "",
+  "INCORRECT_AUTH_DATA": "",
+  "INCORRECT_COUNTRY": "",
+  "INCORRECT_USER_DATA": "",
+  "NO_DATA": "",
   "age": "",
   "avatar": "",
   "cancel": "",

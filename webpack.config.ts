@@ -24,5 +24,6 @@ export default (env: BuildEnv): webpack.Configuration => {
         paths,
         port: PORT,
         analyzer: env.analyzer,
+        project: 'frontend',
     });
 };

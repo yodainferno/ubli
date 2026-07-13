@@ -3,6 +3,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
+import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
+import { User } from 'entities/User';
 import { Sidebar } from './Sidebar';
 
 export default {
@@ -15,9 +17,18 @@ export default {
 
 const Template: ComponentStory<typeof Sidebar> = (args) => <Sidebar {...args} />;
 
-export const Light = Template.bind({});
-Light.args = {};
+export const Primary = Template.bind({});
+Primary.args = {};
+Primary.decorators = [
+    StoreDecorator({
+        user: { authData: {} as User },
+    }),
+];
 
-export const Dark = Template.bind({});
-Dark.args = {};
-Dark.decorators = [ThemeDecorator(Theme.DARK)];
+export const NoAuth = Template.bind({});
+NoAuth.args = {};
+NoAuth.decorators = [
+    StoreDecorator({
+        user: { authData: undefined },
+    }),
+];

@@ -52,6 +52,8 @@ export const EditableProfileCard = ({ className }: EditableProfileCardProps) => 
     }), [t]);
 
     const cardData = useMemo(() => {
+        if (!profileData) return null;
+
         if (profileData.type === ResponseStatus.ERROR) {
             return (
                 <div className={classNames(cls.errorBlock, {}, [cls.ProfileCard])}>
@@ -98,7 +100,9 @@ export const EditableProfileCard = ({ className }: EditableProfileCardProps) => 
     }, [onChange, profileData, profileForm, profileValidateErrors, readOnly, t, validateErrorTranslations]);
 
     useEffect(() => {
-        dispatch(fetchProfileData());
+        if (__PROJECT__ !== 'storybook') {
+            dispatch(fetchProfileData());
+        }
     }, [dispatch]);
 
     return (

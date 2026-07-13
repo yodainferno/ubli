@@ -8,6 +8,7 @@ export function buildPlugins({
     paths,
     isDev,
     analyzer,
+    project,
 }: BuildOptions): webpack.WebpackPluginInstance[] {
     const plugins = [
         new HTMLWebpackPlugin({
@@ -20,6 +21,7 @@ export function buildPlugins({
         }),
         new webpack.DefinePlugin({
             __IS_DEV__: JSON.stringify(isDev),
+            __PROJECT__: JSON.stringify(project),
         }),
         new webpack.HotModuleReplacementPlugin(),
     ];
