@@ -11,9 +11,19 @@ export function useTheme(): UseThemeResult {
     const currentTheme = theme ?? Theme.LIGHT;
 
     const toggleTheme = () => {
-        const newTheme: Theme = currentTheme === Theme.DARK
-            ? Theme.LIGHT
-            : Theme.DARK;
+        let newTheme: Theme;
+
+        switch (currentTheme) {
+        case Theme.LIGHT:
+            newTheme = Theme.DARK; break;
+        case Theme.DARK:
+            newTheme = Theme.ORANGE; break;
+        case Theme.ORANGE:
+            newTheme = Theme.LIGHT; break;
+        default:
+            newTheme = Theme.LIGHT;
+        }
+
         if (setTheme === undefined) {
             throw new Error('useTheme must be used within ThemeProvider');
         }

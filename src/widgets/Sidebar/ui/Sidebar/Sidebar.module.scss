@@ -12,10 +12,8 @@
   display: flex;
   justify-content: center;
   width: 100%;
-}
-
-.lang {
-  margin-left: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .collapseBtn {
@@ -33,13 +31,4 @@
 
 .collapsed {
   width: var(--sidebar-width-collapsed);
-
-  .switchers {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .lang {
-    margin-left: 0;
-  }
 }
