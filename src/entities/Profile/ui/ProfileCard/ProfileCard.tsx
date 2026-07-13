@@ -54,9 +54,9 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
             />
             <Input
                 label={t('firstName')}
-                value={data.first}
+                value={data.firstname}
                 readOnly={readOnly}
-                onChange={(value) => onChangeCallBack(value, 'first')}
+                onChange={(value) => onChangeCallBack(value, 'firstname')}
             />
             <Input
                 label={t('lastName')}

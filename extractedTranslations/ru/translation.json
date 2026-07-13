@@ -1,5 +1,10 @@
 {
   "": "",
+  "INCORRECT_AGE": "INCORRECT_AGE",
+  "INCORRECT_AUTH_DATA": "INCORRECT_AUTH_DATA",
+  "INCORRECT_COUNTRY": "INCORRECT_COUNTRY",
+  "INCORRECT_USER_DATA": "INCORRECT_USER_DATA",
+  "NO_DATA": "NO_DATA",
   "about": "about",
   "age": "age",
   "avatar": "avatar",

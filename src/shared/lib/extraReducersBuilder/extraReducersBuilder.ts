@@ -23,17 +23,23 @@ export const extraReducersBuilder = <
                 state: Draft<SchemaType>,
                 payload: ResponseTypeFromSchema<SchemaType>
             ) => void,
+            cancelFulfilled?: boolean,
             rejected?: (state: Draft<SchemaType>, payload?: string) => void,
+            cancelRejected?: boolean,
         },
     ) => builder
         .addCase(service.pending, (state) => {
             state.data = createLoading();
         })
         .addCase(service.fulfilled, (state, action) => {
-            state.data = createSuccess(action.payload) as Draft<SchemaType>['data'];
+            if (!options?.cancelFulfilled) {
+                state.data = createSuccess(action.payload) as Draft<SchemaType>['data'];
+            }
             options?.fulfilled?.(state, action.payload);
         })
         .addCase(service.rejected, (state, action) => {
-            state.data = createError<string>(action.payload ?? '');
+            if (!options?.cancelRejected) {
+                state.data = createError<string>(action.payload ?? '');
+            }
             options?.rejected?.(state, action.payload);
         });

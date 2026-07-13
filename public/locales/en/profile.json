@@ -12,5 +12,10 @@
   "currency": "Currency",
   "country": "Country",
   "loadErrorTitle": "An error occurred while loading profile",
-  "loadErrorText": "Try refreshing the page"
+  "loadErrorText": "Try refreshing the page",
+  "INCORRECT_COUNTRY": "Не введена страна",
+  "INCORRECT_AGE": "Неверный возраст",
+  "INCORRECT_USER_DATA": "Не введены данные пользователя",
+  "INCORRECT_AUTH_DATA": "Не введены данные авторизации",
+  "NO_DATA": "Данные не заполнены"
 }

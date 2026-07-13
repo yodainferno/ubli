@@ -12,10 +12,14 @@ import { ProfileHeader } from 'features/EditableProfileCard/ui/ProfileHeader/Pro
 import { classNames } from 'shared/lib/classNames/classNames';
 import { getProfileReadOnly } from 'features/EditableProfileCard/model/selectors/getProfileReadOnly/getProfileReadOnly';
 import { getProfileForm } from 'features/EditableProfileCard/model/selectors/getProfileForm/getProfileForm';
+import { ValidateProfileError } from 'features/EditableProfileCard/model/types/profile';
 import cls from './EditableProfileCard.module.scss';
 import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
 import { profileActions, profileReducer } from '../../model/slice/profileSlice';
+import {
+    getProfileValidateErrors,
+} from '../../model/selectors/getProfileValidateErrors/getProfileValidateError';
 
 interface EditableProfileCardProps {
     className?: string;
@@ -29,6 +33,7 @@ export const EditableProfileCard = ({ className }: EditableProfileCardProps) => 
     const dispatch = useAppDispatch();
     const profileData = useSelector(getProfileData);
     const profileForm = useSelector(getProfileForm);
+    const profileValidateErrors = useSelector(getProfileValidateErrors);
 
     const { t } = useTranslation('profile');
 
@@ -37,6 +42,14 @@ export const EditableProfileCard = ({ className }: EditableProfileCardProps) => 
     const onChange = useCallback((value: Profile) => {
         dispatch(profileActions.setForm(value));
     }, [dispatch]);
+
+    const validateErrorTranslations = useMemo(() => ({
+        [ValidateProfileError.INCORRECT_COUNTRY]: t('INCORRECT_COUNTRY'),
+        [ValidateProfileError.INCORRECT_AGE]: t('INCORRECT_AGE'),
+        [ValidateProfileError.INCORRECT_USER_DATA]: t('INCORRECT_USER_DATA'),
+        [ValidateProfileError.INCORRECT_AUTH_DATA]: t('INCORRECT_AUTH_DATA'),
+        [ValidateProfileError.NO_DATA]: t('NO_DATA'),
+    }), [t]);
 
     const cardData = useMemo(() => {
         if (profileData.type === ResponseStatus.ERROR) {
@@ -58,6 +71,13 @@ export const EditableProfileCard = ({ className }: EditableProfileCardProps) => 
             return (
                 <div>
                     <ProfileHeader className={cls.header} />
+                    {
+                        profileValidateErrors.length > 0 && !readOnly && (
+                            profileValidateErrors.map((error) => (
+                                <Text theme={TextTheme.ERROR} text={validateErrorTranslations[error]} key={error} />
+                            ))
+                        )
+                    }
                     <ProfileCard
                         data={formData}
                         className={cls.ProfileCard}
@@ -75,7 +95,7 @@ export const EditableProfileCard = ({ className }: EditableProfileCardProps) => 
                 <Loader />
             </div>
         );
-    }, [onChange, profileData, profileForm, readOnly, t]);
+    }, [onChange, profileData, profileForm, profileValidateErrors, readOnly, t, validateErrorTranslations]);
 
     useEffect(() => {
         dispatch(fetchProfileData());
