@@ -9,7 +9,6 @@ export interface BuildPaths {
 export interface BuildEnv {
   mode: BuildMode
   port: number
-  analyzer?: boolean
 }
 
 export interface BuildOptions {
@@ -17,6 +16,5 @@ export interface BuildOptions {
   isDev: boolean
   paths: BuildPaths
   port: number
-  analyzer?: boolean,
   project: 'frontend' | 'storybook' | 'jest'
 }
