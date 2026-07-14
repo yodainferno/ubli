@@ -17,6 +17,7 @@ export function buildWebpackConfig(
             filename: '[name].[contenthash:8].js', // в кв скобках - спец прееменные. name - берется из entry key (у нас сейчас не объект, поэтому по дефолту - main), contenthash - соль рандомная чтобы браузер подтягивал новую сборку а не из кэша
             path: paths.build,
             clean: true, // чистить outputDir перед сборкой
+            publicPath: '/',
         },
         plugins: buildPlugins(option),
         module: {
