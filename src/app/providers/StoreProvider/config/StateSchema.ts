@@ -8,6 +8,7 @@ import type { ProfileSchema } from 'features/EditableProfileCard';
 import type { To } from '@remix-run/router';
 import type { NavigateOptions } from 'react-router/dist/lib/context';
 import { AxiosInstance } from 'axios';
+import { ArticleDetailsSchema } from 'entities/Article/model/types/articleDetailsSchema';
 
 export interface StateSchema {
     counter: CounterSchema
@@ -15,7 +16,8 @@ export interface StateSchema {
 
     // асихронные редьюсеры
     loginForm?: LoginSchema,
-    profile?: ProfileSchema
+    profile?: ProfileSchema,
+    articleDetails?: ArticleDetailsSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;
