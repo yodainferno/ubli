@@ -1,50 +1,27 @@
-// import { StateSchema } from 'app/providers/StoreProvider';
-// import { DeepPartial } from '@reduxjs/toolkit';
-// import {
-//     getArticleDetailsData,
-//     getArticleDetailsError,
-//     getArticleDetailsIsLoading,
-// } from './articleDetails';
-//
-// describe('articleDetails.test', () => {
-//     test('should return data', () => {
-//         const data = {
-//             id: '1',
-//             title: 'subtitle',
-//         };
-//         const state: DeepPartial<StateSchema> = {
-//             articleDetails: {
-//                 data,
-//             },
-//         };
-//         expect(getArticleDetailsData(state as StateSchema)).toEqual(data);
-//     });
-//     test('should work with empty state data', () => {
-//         const state: DeepPartial<StateSchema> = {};
-//         expect(getArticleDetailsData(state as StateSchema)).toEqual(undefined);
-//     });
-//     test('should return error', () => {
-//         const state: DeepPartial<StateSchema> = {
-//             articleDetails: {
-//                 error: 'error',
-//             },
-//         };
-//         expect(getArticleDetailsError(state as StateSchema)).toEqual('error');
-//     });
-//     test('should work with empty state error', () => {
-//         const state: DeepPartial<StateSchema> = {};
-//         expect(getArticleDetailsError(state as StateSchema)).toEqual(undefined);
-//     });
-//     test('should return isLoading', () => {
-//         const state: DeepPartial<StateSchema> = {
-//             articleDetails: {
-//                 isLoading: true,
-//             },
-//         };
-//         expect(getArticleDetailsIsLoading(state as StateSchema)).toEqual(true);
-//     });
-//     test('should work with empty state isLoading', () => {
-//         const state: DeepPartial<StateSchema> = {};
-//         expect(getArticleDetailsIsLoading(state as StateSchema)).toEqual(false);
-//     });
-// });
+import { StateSchema } from 'app/providers/StoreProvider';
+import { DeepPartial } from '@reduxjs/toolkit';
+import { createSuccess, ResponseStatus, SuccessStatus } from 'shared/api/types/apiResponse';
+import { getArticleDetailsData } from './articleDetails';
+import { Article } from '../types/article';
+
+describe('articleDetails.test', () => {
+    test('should return data', () => {
+        const data = {
+            id: '1',
+            title: 'subtitle',
+        };
+        const state: DeepPartial<StateSchema> = {
+            articleDetails: {
+                data: createSuccess(data as Article),
+            },
+        };
+
+        const result = getArticleDetailsData(state as StateSchema);
+        expect(result.type).toEqual(ResponseStatus.SUCCESS);
+        expect((result as SuccessStatus).payload).toEqual(data);
+    });
+    test('should work with empty state data', () => {
+        const state: DeepPartial<StateSchema> = {};
+        expect(getArticleDetailsData(state as StateSchema).type).toEqual(ResponseStatus.IDLE);
+    });
+});

@@ -36,7 +36,7 @@ Success.decorators = [StoreDecorator({
     profile: {
         data: createSuccess(profileData),
     },
-}, { profile: profileReducer })];
+})];
 
 export const SuccessEditing = Template.bind({});
 SuccessEditing.decorators = [StoreDecorator({
@@ -49,7 +49,7 @@ SuccessEditing.decorators = [StoreDecorator({
         },
         readonly: false,
     },
-}, { profile: profileReducer })];
+})];
 
 export const SuccessEditingValidationErrors = Template.bind({});
 SuccessEditingValidationErrors.decorators = [StoreDecorator({
@@ -68,7 +68,7 @@ SuccessEditingValidationErrors.decorators = [StoreDecorator({
             ValidateProfileError.INCORRECT_AGE,
         ],
     },
-}, { profile: profileReducer })];
+})];
 
 export const ValidateErrorsAndSuccess = Template.bind({});
 ValidateErrorsAndSuccess.decorators = [StoreDecorator({
@@ -81,7 +81,7 @@ ValidateErrorsAndSuccess.decorators = [StoreDecorator({
             ValidateProfileError.INCORRECT_AGE,
         ],
     },
-}, { profile: profileReducer })];
+})];
 
 export const ValidateErrorsAndLoading = Template.bind({});
 ValidateErrorsAndLoading.decorators = [StoreDecorator({
@@ -94,7 +94,7 @@ ValidateErrorsAndLoading.decorators = [StoreDecorator({
             ValidateProfileError.INCORRECT_AGE,
         ],
     },
-}, { profile: profileReducer })];
+})];
 
 export const ValidateErrorsAndError = Template.bind({});
 ValidateErrorsAndError.decorators = [StoreDecorator({
@@ -107,25 +107,25 @@ ValidateErrorsAndError.decorators = [StoreDecorator({
             ValidateProfileError.INCORRECT_AGE,
         ],
     },
-}, { profile: profileReducer })];
+})];
 
 export const Idle = Template.bind({});
 Idle.decorators = [StoreDecorator({
     profile: {
         data: createIdle(),
     },
-}, { profile: profileReducer })];
+})];
 
 export const Loading = Template.bind({});
 Loading.decorators = [StoreDecorator({
     profile: {
         data: createLoading(),
     },
-}, { profile: profileReducer })];
+})];
 
 export const Error = Template.bind({});
 Error.decorators = [StoreDecorator({
     profile: {
         data: createError('some error'),
     },
-}, { profile: profileReducer })];
+})];
