@@ -13,6 +13,8 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { getProfileReadOnly } from 'features/EditableProfileCard/model/selectors/getProfileReadOnly/getProfileReadOnly';
 import { getProfileForm } from 'features/EditableProfileCard/model/selectors/getProfileForm/getProfileForm';
 import { ValidateProfileError } from 'features/EditableProfileCard/model/types/profile';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
+import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById/fetchArticleById';
 import cls from './EditableProfileCard.module.scss';
 import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
@@ -99,11 +101,7 @@ export const EditableProfileCard = ({ className }: EditableProfileCardProps) => 
         );
     }, [onChange, profileData, profileForm, profileValidateErrors, readOnly, t, validateErrorTranslations]);
 
-    useEffect(() => {
-        if (__PROJECT__ !== 'storybook') {
-            dispatch(fetchProfileData());
-        }
-    }, [dispatch]);
+    useInitialEffect(() => dispatch(fetchProfileData()));
 
     return (
         <DynamicModuleLoader reducers={reducers}>

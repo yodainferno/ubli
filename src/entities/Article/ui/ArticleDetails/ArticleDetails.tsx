@@ -18,6 +18,7 @@ import { ArticleBlock, ArticleBlockType } from 'entities/Article/model/types/art
 import { ArticleImageBlockComponent } from 'entities/Article/ui/ArticleImageBlockComponent/ArticleImageBlockComponent';
 import { ArticleTextBlockComponent } from 'entities/Article/ui/ArticleTextBlockComponent/ArticleTextBlockComponent';
 import { ArticleCodeBlockComponent } from 'entities/Article/ui/ArticleCodeBlockComponent/ArticleCodeBlockComponent';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 import cls from './ArticleDetails.module.scss';
 
@@ -47,12 +48,7 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
         }
     }, []);
 
-    useEffect(() => {
-        if (__PROJECT__ !== 'storybook') {
-            dispatch(fetchArticleById(id));
-        }
-    }, [dispatch, id]);
-
+    useInitialEffect(() => dispatch(fetchArticleById(id)));
     let content;
 
     if (articleData.type === ResponseStatus.LOADING || articleData.type === ResponseStatus.IDLE) {
