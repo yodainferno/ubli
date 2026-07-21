@@ -28,14 +28,14 @@ export const CommentList = memo(({ className, commentsList }: CommentListProps) 
     } else if (commentsList.type === ResponseStatus.LOADING) {
         const skeletonLoadingItems = 3;
         content = (
-            Array.from({ length: skeletonLoadingItems }).map(() => (
-                <CommentCard isLoading />
+            Array.from({ length: skeletonLoadingItems }).map((_, i) => (
+                <CommentCard isLoading key={i} />
             ))
         );
     } else if (commentsList.type === ResponseStatus.SUCCESS) {
         content = (
             commentsList.payload!.map((comment) => (
-                <CommentCard comment={comment} />
+                <CommentCard comment={comment} key={comment.id} />
             ))
         );
     }

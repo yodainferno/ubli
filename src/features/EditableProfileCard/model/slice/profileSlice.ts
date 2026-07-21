@@ -43,6 +43,7 @@ export const profileSlice = createSlice({
             })
             .addCase(fetchProfileData.fulfilled, (state, action) => {
                 state.data = createSuccess(action.payload);
+                state.form = action.payload;
             })
             .addCase(fetchProfileData.rejected, (state, action) => {
                 state.data = createError(action.payload);

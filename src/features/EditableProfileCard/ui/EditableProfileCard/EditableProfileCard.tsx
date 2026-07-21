@@ -15,6 +15,7 @@ import { getProfileForm } from 'features/EditableProfileCard/model/selectors/get
 import { ValidateProfileError } from 'features/EditableProfileCard/model/types/profile';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById/fetchArticleById';
+import { useParams } from 'react-router-dom';
 import cls from './EditableProfileCard.module.scss';
 import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
@@ -101,7 +102,10 @@ export const EditableProfileCard = ({ className }: EditableProfileCardProps) => 
         );
     }, [onChange, profileData, profileForm, profileValidateErrors, readOnly, t, validateErrorTranslations]);
 
-    useInitialEffect(() => dispatch(fetchProfileData()));
+    const { id } = useParams<{id: string}>();
+    useInitialEffect(() => {
+        if (id) dispatch(fetchProfileData(id));
+    });
 
     return (
         <DynamicModuleLoader reducers={reducers}>

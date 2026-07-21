@@ -11,6 +11,7 @@ jest.mock('axios');
 const mockedAxios = jest.mocked(axios, true);
 
 const profileData: Profile = {
+    id: '123',
     username: '123',
     firstname: 'John',
     lastname: 'Doe',
@@ -29,7 +30,7 @@ describe('updateProfileData.test', () => {
                 form: { ...profileData, lastname: 'bobobo' },
             },
         });
-        const result = await thunk.calcThunk();
+        const result = await thunk.calcThunk('123');
         //
         expect(mockedAxios.put).toHaveBeenCalledTimes(1);
         expect(result.meta.requestStatus).toBe('fulfilled');
@@ -44,7 +45,7 @@ describe('updateProfileData.test', () => {
                 form: { ...profileData, lastname: 'bobobo' },
             },
         });
-        const result = await thunk.calcThunk();
+        const result = await thunk.calcThunk('123');
         //
         expect(mockedAxios.put).toHaveBeenCalledTimes(1);
         expect(result.meta.requestStatus).toBe('rejected');
@@ -59,7 +60,7 @@ describe('updateProfileData.test', () => {
                 form: { ...profileData, lastname: undefined },
             },
         });
-        const result = await thunk.calcThunk();
+        const result = await thunk.calcThunk('123');
         //
         expect(mockedAxios.put).toHaveBeenCalledTimes(0);
         expect(result.meta.requestStatus).toBe('rejected');

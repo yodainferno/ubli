@@ -8,6 +8,9 @@ import { getProfileReadOnly } from 'features/EditableProfileCard/model/selectors
 import { useCallback } from 'react';
 import { profileActions } from 'features/EditableProfileCard/model/slice/profileSlice';
 import { updateProfileData } from 'features/EditableProfileCard/model/services/updateProfileData/updateProfileData';
+import { getUserAuthData } from 'entities/User';
+import { getProfileData } from 'features/EditableProfileCard/model/selectors/getProfileData/getProfileData';
+import { ResponseStatus } from 'shared/api/types/apiResponse';
 import cls from './ProfileHeader.module.scss';
 
 interface ProfileHeaderProps {
@@ -24,6 +27,16 @@ export const ProfileHeader = (props: ProfileHeaderProps) => {
     const dispatch = useAppDispatch();
     const readOnly = useSelector(getProfileReadOnly);
 
+    const currentUserId = useSelector(getUserAuthData)?.id;
+    const profileData = useSelector(getProfileData);
+
+    let profileId: string | undefined;
+    if (profileData?.type === ResponseStatus.SUCCESS) {
+        profileId = profileData.payload?.id;
+    }
+
+    const canEdit = currentUserId === profileId;
+
     const onEdit = useCallback(() => {
         dispatch(profileActions.onEdit());
     }, [dispatch]);
@@ -33,16 +46,18 @@ export const ProfileHeader = (props: ProfileHeaderProps) => {
     }, [dispatch]);
 
     const onSave = useCallback(() => {
-        dispatch(updateProfileData());
-    }, [dispatch]);
+        dispatch(updateProfileData(profileId ?? ''));
+    }, [dispatch, profileId]);
 
     return (
         <div className={classNames(cls.header, {}, [className])}>
-            <Text
-                className={cls.title}
-                title={t('title')}
-            />
-            {
+            {canEdit && (
+                <Text
+                    className={cls.title}
+                    title={t('title')}
+                />
+            )}
+            {canEdit && (
                 readOnly ? (
                     <Button
                         theme={ButtonTheme.OUTLINE}
@@ -66,7 +81,7 @@ export const ProfileHeader = (props: ProfileHeaderProps) => {
                         </Button>
                     </>
                 )
-            }
+            )}
         </div>
     );
 };

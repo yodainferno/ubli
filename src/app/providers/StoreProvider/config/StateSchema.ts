@@ -10,6 +10,7 @@ import type { NavigateOptions } from 'react-router/dist/lib/context';
 import { AxiosInstance } from 'axios';
 import { ArticleDetailsSchema } from 'entities/Article/model/types/articleDetailsSchema';
 import { ArticleDetailsCommentSchema } from 'pages/ArticleDetailsPage';
+import { AddCommentFormSchema } from 'features/AddNewComment';
 
 export interface StateSchema {
     counter: CounterSchema
@@ -19,7 +20,8 @@ export interface StateSchema {
     loginForm?: LoginSchema,
     profile?: ProfileSchema,
     articleDetails?: ArticleDetailsSchema
-    articleDetailsComment?: ArticleDetailsCommentSchema
+    articleDetailsComment?: ArticleDetailsCommentSchema,
+    addCommentForm?: AddCommentFormSchema,
 }
 
 export type StateSchemaKey = keyof StateSchema;

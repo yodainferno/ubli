@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { ArticleDetails } from 'entities/Article';
 import { useParams } from 'react-router-dom';
 import { Text } from 'shared/ui/Text/Text';
@@ -12,6 +12,9 @@ import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEf
 import {
     fetchCommentsByArticleId,
 } from 'pages/ArticleDetailsPage/model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
+import { AddCommentForm } from 'features/AddNewComment';
+import { addCommentForArticle }
+    from 'pages/ArticleDetailsPage/model/services/addCommentForArticle/addCommentForArticle';
 import { getArticleCommentsData } from '../../model/selectors/comments';
 import cls from './ArticleDetailsPage.module.scss';
 import { articleDetailsCommentReducer, getArticleComments } from '../../model/slices/articleDetailsCommentSlice';
@@ -41,6 +44,10 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
         commentsList = data!;
     }
 
+    const onSendComment = useCallback((value: string | undefined) => {
+        dispatch(addCommentForArticle(value));
+    }, [dispatch]);
+
     if (!id) {
         return (
             <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
@@ -50,10 +57,11 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
     }
 
     return (
-        <DynamicModuleLoader reducers={reducers} keepAfterUnmount={false}>
+        <DynamicModuleLoader reducers={reducers}>
             <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
                 <ArticleDetails id={id} />
                 <Text title={t('Комментарии')} />
+                <AddCommentForm onSendComment={onSendComment} />
                 <CommentList
                     className={cls.commentList}
                     commentsList={commentsList}

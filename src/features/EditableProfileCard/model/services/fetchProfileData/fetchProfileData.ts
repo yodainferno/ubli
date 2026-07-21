@@ -5,18 +5,18 @@ import { Profile } from 'entities/Profile';
 // это action creator
 export const fetchProfileData = createAsyncThunk<
     Profile,
-    void,
+    string,
     ThunkConfig<string>
 >(
     'profile/fetchProfileData',
-    async (authData, thunkApi) => {
+    async (profileId, thunkApi) => {
         const {
             extra,
             rejectWithValue,
         } = thunkApi;
 
         try {
-            const response = await extra.api.get('/profile');
+            const response = await extra.api.get(`/profile/${profileId}`);
 
             if (!response.data) {
                 throw new Error();

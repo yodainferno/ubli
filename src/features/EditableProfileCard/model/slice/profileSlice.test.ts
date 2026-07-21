@@ -6,6 +6,7 @@ import { Profile } from '../../../../entities/Profile';
 import { Country } from '../../../../entities/Country';
 import { Currency } from '../../../../entities/Currency';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
+import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData';
 
 const profileData: Profile = {
     username: '123',
@@ -69,6 +70,22 @@ describe('profileSlice.test', () => {
         });
     });
 
+    test('fetchProfileData.fulfilled', () => {
+        const state: DeepPartial<ProfileSchema> = {
+            data: createLoading(),
+            readonly: true,
+        };
+
+        expect(profileReducer(
+            state as ProfileSchema,
+            fetchProfileData.fulfilled(profileData, '', '1'),
+        )).toEqual({
+            data: createSuccess(profileData),
+            form: profileData,
+            readonly: true,
+        });
+    });
+
     // тестирует extrareducers с логикой
     test('updateProfileData.pending', () => {
         const state: DeepPartial<ProfileSchema> = {
@@ -98,7 +115,7 @@ describe('profileSlice.test', () => {
         };
         expect(profileReducer(
             state as ProfileSchema,
-            updateProfileData.fulfilled(profileData, ''),
+            updateProfileData.fulfilled(profileData, '123', ''),
         )).toEqual({
             readonly: true,
             form: profileData,
