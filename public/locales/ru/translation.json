@@ -12,5 +12,7 @@
   "signIn": "Войти",
   "logOut": "Выйти",
   "language": "Язык",
-  "languageShort": "Короткий язык"
+  "languageShort": "Короткий язык",
+  "commentPlaceholder": "Введите текст комментария",
+  "send": "Отправить"
 }

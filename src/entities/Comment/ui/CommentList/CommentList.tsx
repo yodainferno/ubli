@@ -1,10 +1,11 @@
 import { memo } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { useTranslation } from 'react-i18next';
 import { ApiResponse, ResponseStatus } from 'shared/api/types/apiResponse';
 import { CommentCard } from 'entities/Comment/ui/CommentCard/CommentCard';
 import cls from './CommentList.module.scss';
 import { Comment } from '../../model/types/comment';
+
+const skeletonKeys = ['comment-skeleton-1', 'comment-skeleton-2', 'comment-skeleton-3'];
 
 interface CommentListProps {
     className?: string;
@@ -12,8 +13,6 @@ interface CommentListProps {
 }
 
 export const CommentList = memo(({ className, commentsList }: CommentListProps) => {
-    const { t } = useTranslation();
-
     let content;
     if (commentsList.type === ResponseStatus.ERROR) {
         content = (
@@ -26,10 +25,9 @@ export const CommentList = memo(({ className, commentsList }: CommentListProps) 
             <div className={classNames(cls.CommentList, {}, [className])} />
         );
     } else if (commentsList.type === ResponseStatus.LOADING) {
-        const skeletonLoadingItems = 3;
         content = (
-            Array.from({ length: skeletonLoadingItems }).map((_, i) => (
-                <CommentCard isLoading key={i} />
+            skeletonKeys.map((key) => (
+                <CommentCard isLoading key={key} />
             ))
         );
     } else if (commentsList.type === ResponseStatus.SUCCESS) {

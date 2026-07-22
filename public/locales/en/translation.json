@@ -12,5 +12,7 @@
   "signIn": "Sign in",
   "logOut": "Log out",
   "language": "Language",
-  "languageShort": "Lang"
+  "languageShort": "Lang",
+  "commentPlaceholder": "Enter comment text",
+  "send": "Send"
 }

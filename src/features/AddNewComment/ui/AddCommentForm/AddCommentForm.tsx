@@ -8,10 +8,7 @@ import { addCommentFormActions, addCommentFormReducer } from 'features/AddNewCom
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import cls from './AddCommentForm.module.scss';
-import {
-    getAddCommentFormData,
-    getAddCommentFormText,
-} from '../../model/selectors/addCommentFormSelectors';
+import { getAddCommentFormText } from '../../model/selectors/addCommentFormSelectors';
 
 interface AddCommentFormProps {
     className?: string;
@@ -26,7 +23,6 @@ const AddCommentForm = memo(({ className, onSendComment }: AddCommentFormProps) 
     const { t } = useTranslation();
 
     const text = useSelector(getAddCommentFormText);
-    const data = useSelector(getAddCommentFormData);
 
     const dispatch = useAppDispatch();
 
@@ -43,7 +39,7 @@ const AddCommentForm = memo(({ className, onSendComment }: AddCommentFormProps) 
         <DynamicModuleLoader reducers={reducers}>
             <div className={classNames(cls.AddCommentForm, {}, [className])}>
                 <Input
-                    placeholder="Введите текст комментария"
+                    placeholder={t('commentPlaceholder')}
                     value={text}
                     onChange={onCommentTextChange}
                     className={cls.input}
@@ -52,7 +48,7 @@ const AddCommentForm = memo(({ className, onSendComment }: AddCommentFormProps) 
                     theme={ButtonTheme.OUTLINE}
                     onClick={onSendHandler}
                 >
-                    Отправить
+                    {t('send')}
                 </Button>
             </div>
         </DynamicModuleLoader>
