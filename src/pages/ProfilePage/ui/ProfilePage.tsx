@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { EditableProfileCard } from 'features/EditableProfileCard';
 import { classNames } from 'shared/lib/classNames/classNames';
+import { Page } from 'shared/ui/Page/Page';
 import cls from './ProfilePage.module.scss';
 
 interface ProfilePageProps {
@@ -8,9 +9,9 @@ interface ProfilePageProps {
 }
 
 const ProfilePage = memo(({ className }: ProfilePageProps) => (
-    <div className={classNames(cls.ProfilePage, {}, [className])}>
+    <Page className={classNames(cls.ProfilePage, {}, [className])}>
         <EditableProfileCard />
-    </div>
+    </Page>
 ));
 
 export default ProfilePage;

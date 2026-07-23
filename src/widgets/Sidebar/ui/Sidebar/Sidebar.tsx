@@ -4,7 +4,6 @@ import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { LangSwitcher } from 'widgets/LangSwitcher';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { useSelector } from 'react-redux';
-// import { getUserAuthData } from 'entities/User';
 import { getSidebarItems } from '../../model/selectors/getSidebarItems';
 import cls from './Sidebar.module.scss';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -20,17 +19,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         setCollapsed((prev) => !prev);
     };
 
-    // const isAuth = useSelector(getUserAuthData);
-
     const sidebarItemsList = useSelector(getSidebarItems);
-
-    // const availableItems = useMemo(
-    //     () => SidebarItemsList.filter(
-    //         // авторизован или публичная страница
-    //         (item) => isAuth || !item.authOnly,
-    //     ),
-    //     [isAuth],
-    // );
 
     const itemsList = useMemo(() => sidebarItemsList.map((item) => (
         <SidebarItem
@@ -41,7 +30,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
     )), [sidebarItemsList, collapsed]);
 
     return (
-        <div
+        <nav
             data-testid="sidebar"
             className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [className])}
         >
@@ -65,6 +54,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                     className={cls.lang}
                 />
             </div>
-        </div>
+        </nav>
     );
 });
