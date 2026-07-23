@@ -11,6 +11,7 @@ import { AxiosInstance } from 'axios';
 import { ArticleDetailsSchema } from 'entities/Article/model/types/articleDetailsSchema';
 import { ArticleDetailsCommentSchema } from 'pages/ArticleDetailsPage';
 import { AddCommentFormSchema } from 'features/AddNewComment';
+import { ArticlesPageSchema } from 'pages/ArticlesPage';
 
 export interface StateSchema {
     counter: CounterSchema
@@ -22,6 +23,7 @@ export interface StateSchema {
     articleDetails?: ArticleDetailsSchema
     articleDetailsComment?: ArticleDetailsCommentSchema,
     addCommentForm?: AddCommentFormSchema,
+    articlesPage?: ArticlesPageSchema,
 }
 
 export type StateSchemaKey = keyof StateSchema;
