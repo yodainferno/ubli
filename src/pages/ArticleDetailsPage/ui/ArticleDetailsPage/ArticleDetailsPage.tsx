@@ -15,7 +15,7 @@ import {
 import { AddCommentForm } from 'features/AddNewComment';
 import { addCommentForArticle }
     from 'pages/ArticleDetailsPage/model/services/addCommentForArticle/addCommentForArticle';
-import { Page } from 'shared/ui/Page/Page';
+import { Page } from 'widgets/Page';
 import { getArticleCommentsData } from '../../model/selectors/comments';
 import cls from './ArticleDetailsPage.module.scss';
 import { articleDetailsCommentReducer, getArticleComments } from '../../model/slices/articleDetailsCommentSlice';

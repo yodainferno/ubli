@@ -4,6 +4,7 @@ import { userReducer } from 'entities/User';
 import { $api } from 'shared/api/api';
 import type { To } from '@remix-run/router';
 import type { NavigateOptions } from 'react-router/dist/lib/context';
+import { pageReducer } from 'widgets/Page';
 import { createReducerManager } from './reducerManager';
 import { ReducersList, StateSchema } from './StateSchema';
 
@@ -15,6 +16,7 @@ export function createReduxStore(
         ...asyncReducers,
         counter: counterReducer,
         user: userReducer,
+        page: pageReducer,
     };
 
     const reducerManager = createReducerManager(rootReducers);

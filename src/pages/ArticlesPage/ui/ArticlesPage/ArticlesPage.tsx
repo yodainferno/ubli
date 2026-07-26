@@ -6,7 +6,7 @@ import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEf
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { ArticleView, ArticleViewSelector } from 'entities/Article';
-import { Page } from 'shared/ui/Page/Page';
+import { Page } from 'widgets/Page';
 import {
     getArticlesLoading,
     getArticlesView,
