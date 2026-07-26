@@ -4,7 +4,6 @@ import { Theme, useTheme } from 'app/providers/ThemeProvider';
 import LightIcon from 'shared/assets/icons/theme-light.svg';
 import DarkIcon from 'shared/assets/icons/theme-dark.svg';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
-import { useTranslation } from 'react-i18next';
 import cls from './ThemeSwitcher.module.scss';
 
 interface ThemeSwitcherProps {
@@ -13,7 +12,6 @@ interface ThemeSwitcherProps {
 
 export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
     const { theme, toggleTheme } = useTheme();
-    const { t } = useTranslation();
 
     return (
         <Button

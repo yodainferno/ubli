@@ -29,8 +29,10 @@ export const DynamicModuleLoader = (props: DynamicModuleLoaderProps) => {
         const reducerEntries = Object.entries(reducers) as ReducersListEntry[];
 
         reducerEntries.forEach(([name, reducer]) => {
-            store.reducerManager.add(name, reducer);
-            dispatch({ type: `@INIT ${name} reducer` });
+            if (!Object.keys(store.reducerManager.getReducerMap()).includes(name)) {
+                store.reducerManager.add(name, reducer);
+                dispatch({ type: `@INIT ${name} reducer` });
+            }
         });
 
         return () => {

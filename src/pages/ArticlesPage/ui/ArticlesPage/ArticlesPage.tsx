@@ -1,21 +1,18 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { ArticleList } from 'entities/Article/ui/ArticleList/ArticleList';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { fetchArticlesList } from 'pages/ArticlesPage/model/services/fetchArticlesList/fetchArticlesList';
 import { useSelector } from 'react-redux';
-import {
-    getArticlesHasMore,
-    getArticlesLoading,
-    getArticlesPage,
-    getArticlesView,
-} from 'pages/ArticlesPage/model/selectors/articles';
 import { ArticleView, ArticleViewSelector } from 'entities/Article';
 import { Page } from 'shared/ui/Page/Page';
-import { fetchNextArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import {
+    getArticlesLoading,
+    getArticlesView,
+} from '../../model/selectors/articles';
+import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import cls from './ArticlesPage.module.scss';
 import { articlePageSliceActions, articlePageSliceReducer, getArticles } from '../../model/slices/articlePageSlice';
 
@@ -39,10 +36,7 @@ const ArticlesPage = ({ className }: ArticlesPageProps) => {
     }, [dispatch]);
 
     useInitialEffect(() => {
-        dispatch(articlePageSliceActions.initState());
-        dispatch(fetchArticlesList({
-            page: 1,
-        }));
+        dispatch(initArticlesPage());
     });
 
     const onLoadNextPart = useCallback(() => {
@@ -50,7 +44,7 @@ const ArticlesPage = ({ className }: ArticlesPageProps) => {
     }, [dispatch]);
 
     return (
-        <DynamicModuleLoader reducers={reducers}>
+        <DynamicModuleLoader reducers={reducers} keepAfterUnmount>
             <Page
                 className={classNames(cls.ArticlesPage, {}, [className])}
                 onScrollEnd={onLoadNextPart}
