@@ -7,20 +7,33 @@ import { fetchArticlesList } from '../fetchArticlesList/fetchArticlesList';
 
 export const initArticlesPage = createAsyncThunk<
     void,
-    void,
+    URLSearchParams,
     ThunkConfig<string>
 >(
     'ArticlesPage/initArticlesPage',
-    async (_, thunkApi) => {
+    async (searchParams, thunkApi) => {
         const { dispatch, getState } = thunkApi;
 
         const articlesInited = getArticlesInited(getState());
 
         if (!articlesInited) {
+            const urlParams = {
+                order: articlePageSliceActions.setOrder,
+                sort: articlePageSliceActions.setSort,
+                search: articlePageSliceActions.setSearch,
+                type: articlePageSliceActions.setType,
+            };
+
+            Object.entries(urlParams).forEach(([param, callBack]) => {
+                const paramFromUrl = searchParams.get(param);
+                if (paramFromUrl) {
+                    // @ts-ignore
+                    dispatch(callBack(paramFromUrl));
+                }
+            });
+
             dispatch(articlePageSliceActions.initState());
-            dispatch(fetchArticlesList({
-                page: 1,
-            }));
+            dispatch(fetchArticlesList());
         }
     },
 );

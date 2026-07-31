@@ -4,3 +4,5 @@ export { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
 export { ArticleViewSelector } from './ui/ArticleViewSelector/ArticleViewSelector';
 
 export { getArticleDetailsData } from './model/selectors/articleDetails';
+
+export { ArticleSortSelector } from './ui/ArticleSortSelector/ArticleSortSelector';
