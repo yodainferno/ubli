@@ -1,9 +1,9 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
-import { ArticleDetails } from 'entities/Article';
+import { Article, ArticleDetails } from 'entities/Article';
 import { useParams } from 'react-router-dom';
-import { Text } from 'shared/ui/Text/Text';
+import { Text, TextSize } from 'shared/ui/Text/Text';
 import { Comment, CommentList } from 'entities/Comment';
 import { ApiResponse, createSuccess, ResponseStatus } from 'shared/api/types/apiResponse';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -13,19 +13,25 @@ import {
     fetchCommentsByArticleId,
 } from 'pages/ArticleDetailsPage/model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import { AddCommentForm } from 'features/AddNewComment';
-import { addCommentForArticle }
-    from 'pages/ArticleDetailsPage/model/services/addCommentForArticle/addCommentForArticle';
 import { Page } from 'widgets/Page';
+import { getArticleRecommendations } from 'pages/ArticleDetailsPage/model/slices/articleDetailsRecommendationsSlice';
+import { getArticleRecommendationsData } from 'pages/ArticleDetailsPage/model/selectors/recommendations';
+import { ArticleList } from 'entities/Article/ui/ArticleList/ArticleList';
+import {
+    fetchRecommendationsByArticleId,
+} from 'pages/ArticleDetailsPage/model/services/fetchRecommendationsByArticleId/fetchRecommendationsByArticleId';
+import { articleDetailsPageReducer } from '../../model/slices';
+import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import { getArticleCommentsData } from '../../model/selectors/comments';
 import cls from './ArticleDetailsPage.module.scss';
-import { articleDetailsCommentReducer, getArticleComments } from '../../model/slices/articleDetailsCommentSlice';
+import { getArticleComments } from '../../model/slices/articleDetailsCommentSlice';
 
 interface ArticleDetailsPageProps {
     className?: string;
 }
 
 const reducers: ReducersList = {
-    articleDetailsComment: articleDetailsCommentReducer,
+    articleDetailsPage: articleDetailsPageReducer,
 };
 const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
     const { t } = useTranslation('article');
@@ -33,21 +39,34 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
     const { id } = useParams<{id: string}>();
 
     const dispatch = useDispatch();
-    useInitialEffect(() => dispatch(fetchCommentsByArticleId(id)));
+    useInitialEffect(() => {
+        dispatch(fetchCommentsByArticleId(id));
+        dispatch(fetchRecommendationsByArticleId());
+    });
 
     const comments = useSelector(getArticleComments.selectAll);
-    const data = useSelector(getArticleCommentsData);
+    const commentsData = useSelector(getArticleCommentsData);
 
     let commentsList: ApiResponse<Comment[], string>;
-    if (data?.type === ResponseStatus.SUCCESS) {
+    if (commentsData?.type === ResponseStatus.SUCCESS) {
         commentsList = createSuccess(comments);
     } else {
-        commentsList = data!;
+        commentsList = commentsData!;
     }
 
     const onSendComment = useCallback((value: string | undefined) => {
         dispatch(addCommentForArticle(value));
     }, [dispatch]);
+
+    const recommendations = useSelector(getArticleRecommendations.selectAll);
+    const recommendationsData = useSelector(getArticleRecommendationsData);
+
+    let recommendationsList: ApiResponse<Article[], string>;
+    if (recommendationsData?.type === ResponseStatus.SUCCESS) {
+        recommendationsList = createSuccess(recommendations);
+    } else {
+        recommendationsList = recommendationsData!;
+    }
 
     if (!id) {
         return (
@@ -61,7 +80,21 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
         <DynamicModuleLoader reducers={reducers}>
             <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
                 <ArticleDetails id={id} />
-                <Text title={t('Комментарии')} />
+                <Text size={TextSize.L} title={t('Рекомендуем')} />
+                <ArticleList
+                    articles={
+                        recommendationsList.type === ResponseStatus.SUCCESS
+                            ? recommendationsList.payload!
+                            : []
+                    }
+                    isLoading={
+                        recommendationsList.type === ResponseStatus.LOADING
+                        || recommendationsList.type === ResponseStatus.IDLE
+                    }
+                    className={cls.recs}
+                />
+
+                <Text size={TextSize.L} title={t('Комментарии')} />
                 <AddCommentForm onSendComment={onSendComment} />
                 <CommentList
                     className={cls.commentList}

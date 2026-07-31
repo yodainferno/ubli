@@ -1,9 +1,7 @@
-import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
+import { configureStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
 import { counterReducer } from 'entities/Counter';
 import { userReducer } from 'entities/User';
 import { $api } from 'shared/api/api';
-import type { To } from '@remix-run/router';
-import type { NavigateOptions } from 'react-router/dist/lib/context';
 import { pageReducer } from 'widgets/Page';
 import { createReducerManager } from './reducerManager';
 import { ReducersList, StateSchema } from './StateSchema';
@@ -12,6 +10,7 @@ export function createReduxStore(
     initialState?: StateSchema,
     asyncReducers?: ReducersList,
 ) {
+    // @ts-ignore
     const rootReducers: ReducersMapObject<StateSchema> = {
         ...asyncReducers,
         counter: counterReducer,

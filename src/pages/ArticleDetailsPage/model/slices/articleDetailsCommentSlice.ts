@@ -7,8 +7,7 @@ import { StateSchema } from 'app/providers/StoreProvider';
 import {
     createError, createIdle, createLoading, createSuccess,
 } from 'shared/api/types/apiResponse';
-import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById/fetchArticleById';
-import { Article } from 'entities/Article';
+
 import {
     fetchCommentsByArticleId,
 } from 'pages/ArticleDetailsPage/model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
@@ -19,13 +18,13 @@ const commentsAdapter = createEntityAdapter<Comment>({
 });
 
 export const getArticleComments = commentsAdapter.getSelectors<StateSchema>(
-    (state) => state.articleDetailsComment || commentsAdapter.getInitialState(),
+    (state) => state.articleDetailsPage?.comments || commentsAdapter.getInitialState(),
 );
 
 const articleDetailsCommentSlice = createSlice({
     name: 'articleDetailsCommentSlice',
     initialState: commentsAdapter.getInitialState<ArticleDetailsCommentSchema>({
-        data: createSuccess(null),
+        data: createIdle(),
         ids: [],
         entities: {},
     }),

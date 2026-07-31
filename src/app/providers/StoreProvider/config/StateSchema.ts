@@ -7,10 +7,10 @@ import {
 import type { ProfileSchema } from 'features/EditableProfileCard';
 import { AxiosInstance } from 'axios';
 import { ArticleDetailsSchema } from 'entities/Article/model/types/articleDetailsSchema';
-import { ArticleDetailsCommentSchema } from 'pages/ArticleDetailsPage';
 import { AddCommentFormSchema } from 'features/AddNewComment';
 import { ArticlesPageSchema } from 'pages/ArticlesPage';
 import { PageSchema } from 'widgets/Page';
+import { ArticleDetailsPageSchema } from 'pages/ArticleDetailsPage';
 
 export interface StateSchema {
     counter: CounterSchema
@@ -21,7 +21,7 @@ export interface StateSchema {
     loginForm?: LoginSchema,
     profile?: ProfileSchema,
     articleDetails?: ArticleDetailsSchema
-    articleDetailsComment?: ArticleDetailsCommentSchema,
+    articleDetailsPage?: ArticleDetailsPageSchema // comments, recs
     addCommentForm?: AddCommentFormSchema,
     articlesPage?: ArticlesPageSchema,
 }
@@ -29,7 +29,7 @@ export interface StateSchema {
 export type StateSchemaKey = keyof StateSchema;
 
 export type ReducersList = {
-    [name in StateSchemaKey]?: Reducer
+    [name in StateSchemaKey]?: Reducer<NonNullable<StateSchema[name]>>
 }
 
 export interface ReducerManager {
