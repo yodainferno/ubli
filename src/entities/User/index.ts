@@ -1,14 +1,16 @@
 export {
+    getUserAuthData,
+} from './model/selectors/getUserAuthData/getUserAuthData';
+
+export {
+    getUserInited,
+} from './model/selectors/getUserInited/getUserInited';
+
+export {
     userReducer,
     userActions,
 } from './model/slice/userSlice';
-
-// export { Counter } from './ui/Counter';
-
-export type {
-    User,
+export {
     UserSchema,
+    User,
 } from './model/types/user';
-
-export { getUserAuthData } from './model/selectors/getUserAuthData/getUserAuthData';
-export { getUserInited } from './model/selectors/getUserInited/getUserInited';

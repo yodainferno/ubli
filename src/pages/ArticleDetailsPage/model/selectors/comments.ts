@@ -1,4 +1,9 @@
 import { StateSchema } from 'app/providers/StoreProvider';
-import { createIdle } from 'shared/api/types/apiResponse';
 
-export const getArticleCommentsData = (state: StateSchema) => state.articleDetailsPage?.comments?.data ?? createIdle();
+export const getArticleCommentsIsLoading = (state: StateSchema) => {
+    return state.articleDetailsPage?.comments?.isLoading;
+};
+
+export const getArticleCommentsError = (state: StateSchema) => {
+    return state.articleDetailsPage?.comments?.error;
+};

@@ -1,9 +1,11 @@
-export { StoreProvider } from './ui/StoreProvider';
-export { createReduxStore } from './config/store';
-export type {
+import { StoreProvider } from './ui/StoreProvider';
+import { createReduxStore, AppDispatch } from './config/store';
+import type { StateSchema, ReduxStoreWithManager, ThunkConfig } from './config/StateSchema';
+
+export {
+    StoreProvider,
+    createReduxStore,
     StateSchema,
-    ReducersList,
-    ThunkExtraArg,
+    AppDispatch,
     ThunkConfig,
-    ReduxStoreWithManager,
-} from 'app/providers/StoreProvider/config/StateSchema'; // тип из вышестоящего - исключение FSD
+};

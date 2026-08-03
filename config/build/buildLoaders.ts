@@ -1,27 +1,24 @@
-import type webpack from 'webpack';
-import { type BuildOptions } from './types/config';
+import webpack from 'webpack';
 import { buildCssLoader } from './loaders/buildCssLoader';
+import { BuildOptions } from './types/config';
 import { buildBabelLoader } from './loaders/buildBabelLoader';
 
-export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
+export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
+    const { isDev } = options;
+
     const svgLoader = {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
     };
 
-    const babelLoader = buildBabelLoader(isDev);
+    const babelLoader = buildBabelLoader(options);
 
     const cssLoader = buildCssLoader(isDev);
 
     // Если не используем тайпскрипт - нужен babel-loader
     const typescriptLoader = {
         test: /\.tsx?$/,
-        use: {
-            loader: 'ts-loader',
-            options: {
-                configFile: 'tsconfig.build.json',
-            },
-        },
+        use: 'ts-loader',
         exclude: /node_modules/,
     };
 

@@ -1,12 +1,9 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ProfileCard } from 'entities/Profile';
 import { Country } from 'entities/Country';
 import { Currency } from 'entities/Currency';
-import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
-import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
-import { Theme } from 'app/providers/ThemeProvider';
-import { ProfileCard } from './ProfileCard';
-import { Profile } from '../../model/types/profile';
+import avatar from 'shared/assets/tests/storybook.jpg';
 
 export default {
     title: 'entities/ProfileCard',
@@ -18,38 +15,26 @@ export default {
 
 const Template: ComponentStory<typeof ProfileCard> = (args) => <ProfileCard {...args} />;
 
-const profileData: Profile = {
-    username: '123',
-    firstname: 'John',
-    lastname: 'Doe',
-    age: 42,
-    country: Country.Armenia,
-    currency: Currency.EUR,
-    city: 'San Francisco',
+export const Primary = Template.bind({});
+Primary.args = {
+    data: {
+        username: 'admin',
+        age: 22,
+        country: Country.Ukraine,
+        lastname: 'ulbi tv',
+        first: 'asd',
+        city: 'asf',
+        currency: Currency.USD,
+        avatar,
+    },
 };
 
-export const Readonly = Template.bind({});
-Readonly.args = {
-    data: profileData,
-    readOnly: true,
+export const withError = Template.bind({});
+withError.args = {
+    error: 'true',
 };
 
-export const ReadonlyDark = Template.bind({});
-ReadonlyDark.args = {
-    data: profileData,
-    readOnly: true,
+export const Loading = Template.bind({});
+Loading.args = {
+    isLoading: true,
 };
-ReadonlyDark.decorators = [ThemeDecorator(Theme.DARK)];
-
-export const Editable = Template.bind({});
-Editable.args = {
-    data: profileData,
-    readOnly: false,
-};
-
-export const EditableDark = Template.bind({});
-EditableDark.args = {
-    data: profileData,
-    readOnly: false,
-};
-EditableDark.decorators = [ThemeDecorator(Theme.DARK)];

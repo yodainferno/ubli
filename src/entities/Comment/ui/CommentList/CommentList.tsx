@@ -1,44 +1,43 @@
-import { memo } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { ApiResponse, ResponseStatus } from 'shared/api/types/apiResponse';
-import { CommentCard } from 'entities/Comment/ui/CommentCard/CommentCard';
+import { memo } from 'react';
+import { Text } from 'shared/ui/Text/Text';
+import { useTranslation } from 'react-i18next';
 import cls from './CommentList.module.scss';
+import { CommentCard } from '../CommentCard/CommentCard';
 import { Comment } from '../../model/types/comment';
-
-const skeletonKeys = ['comment-skeleton-1', 'comment-skeleton-2', 'comment-skeleton-3'];
 
 interface CommentListProps {
     className?: string;
-    commentsList: ApiResponse<Comment[], string>
+    comments?: Comment[];
+    isLoading?: boolean;
 }
 
-export const CommentList = memo(({ className, commentsList }: CommentListProps) => {
-    let content;
-    if (commentsList.type === ResponseStatus.ERROR) {
-        content = (
+export const CommentList = memo((props: CommentListProps) => {
+    const { className, isLoading, comments } = props;
+    const { t } = useTranslation();
+
+    if (isLoading) {
+        return (
             <div className={classNames(cls.CommentList, {}, [className])}>
-                {commentsList.error}
+                <CommentCard isLoading />
+                <CommentCard isLoading />
+                <CommentCard isLoading />
             </div>
-        );
-    } else if (commentsList.type === ResponseStatus.IDLE) {
-        content = (
-            <div className={classNames(cls.CommentList, {}, [className])} />
-        );
-    } else if (commentsList.type === ResponseStatus.LOADING) {
-        content = (
-            skeletonKeys.map((key) => (
-                <CommentCard isLoading key={key} />
-            ))
-        );
-    } else if (commentsList.type === ResponseStatus.SUCCESS) {
-        content = (
-            commentsList.payload!.map((comment) => (
-                <CommentCard comment={comment} key={comment.id} />
-            ))
         );
     }
 
     return (
-        <div className={classNames(cls.CommentList, {}, [className])}>{content}</div>
+        <div className={classNames(cls.CommentList, {}, [className])}>
+            {comments?.length
+                ? comments.map((comment) => (
+                    <CommentCard
+                        isLoading={isLoading}
+                        className={cls.comment}
+                        comment={comment}
+                        key={comment.id}
+                    />
+                ))
+                : <Text text={t('Комментарии отсутствуют')} />}
+        </div>
     );
 });

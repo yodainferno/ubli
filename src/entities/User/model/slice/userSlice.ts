@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { USER_LOCALSTORAGE } from 'shared/consts/localstorage';
-import { User, UserSchema } from '../types/user';
+import { USER_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
+import { UserSchema, User } from '../types/user';
 
 const initialState: UserSchema = {
     _inited: false,
 };
+
 export const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -13,7 +14,7 @@ export const userSlice = createSlice({
             state.authData = action.payload;
         },
         initAuthData: (state) => {
-            const user = localStorage.getItem(USER_LOCALSTORAGE);
+            const user = localStorage.getItem(USER_LOCALSTORAGE_KEY);
             if (user) {
                 state.authData = JSON.parse(user);
             }
@@ -21,10 +22,11 @@ export const userSlice = createSlice({
         },
         logout: (state) => {
             state.authData = undefined;
-            localStorage.removeItem(USER_LOCALSTORAGE);
+            localStorage.removeItem(USER_LOCALSTORAGE_KEY);
         },
     },
 });
 
-export const { reducer: userReducer } = userSlice;
+// Action creators are generated for each case reducer function
 export const { actions: userActions } = userSlice;
+export const { reducer: userReducer } = userSlice;

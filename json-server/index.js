@@ -9,16 +9,10 @@ const router = jsonServer.router(path.resolve(__dirname, 'db.json'));
 server.use(jsonServer.defaults({}));
 server.use(jsonServer.bodyParser);
 
-const MIN_RESPONSE_TIME = 500;
-const MAX_RESPONSE_TIME = 1200;
-
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
 server.use(async (req, res, next) => {
-    const awaitTime = Math.round(
-        MIN_RESPONSE_TIME + Math.random() * (MAX_RESPONSE_TIME - MIN_RESPONSE_TIME),
-    );
     await new Promise((res) => {
-        setTimeout(res, awaitTime);
+        setTimeout(res, 800);
     });
     next();
 });

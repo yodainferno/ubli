@@ -1,34 +1,34 @@
 import { classNames, Mods } from 'shared/lib/classNames/classNames';
-import { ChangeEvent, useMemo } from 'react';
+import { ChangeEvent, memo, useMemo } from 'react';
 import cls from './Select.module.scss';
 
-export interface SelectOption<T> {
-    value: T;
+export interface SelectOption {
+    value: string;
     content: string;
 }
 
-interface SelectProps<T extends string> {
+interface SelectProps {
     className?: string;
     label?: string;
-    options?: SelectOption<T>[];
+    options?: SelectOption[];
     value?: string;
-    onChange?: (value: T) => void;
-    readOnly?: boolean;
+    onChange?: (value: string) => void;
+    readonly?: boolean;
 }
 
-export const Select = <T extends string = string>(props: SelectProps<T>) => {
+export const Select = memo((props: SelectProps) => {
     const {
         className,
         label,
         options,
         onChange,
         value,
-        readOnly,
+        readonly,
     } = props;
 
     const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
         if (onChange) {
-            onChange(e.target.value as T);
+            onChange(e.target.value);
         }
     };
 
@@ -48,11 +48,11 @@ export const Select = <T extends string = string>(props: SelectProps<T>) => {
         <div className={classNames(cls.Wrapper, mods, [className])}>
             {label && (
                 <span className={cls.label}>
-                    {label}
+                    {`${label}>`}
                 </span>
             )}
             <select
-                disabled={readOnly}
+                disabled={readonly}
                 className={cls.select}
                 value={value}
                 onChange={onChangeHandler}
@@ -61,4 +61,4 @@ export const Select = <T extends string = string>(props: SelectProps<T>) => {
             </select>
         </div>
     );
-};
+});

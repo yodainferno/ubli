@@ -1,9 +1,10 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import { ArticleSortSelector } from './ArticleSortSelector';
 
 export default {
-    title: 'todo/ArticleSortSelector',
+    title: 'entities/Article/ArticleSortSelector',
     component: ArticleSortSelector,
     argTypes: {
         backgroundColor: { control: 'color' },
@@ -14,4 +15,3 @@ const Template: ComponentStory<typeof ArticleSortSelector> = (args) => <ArticleS
 
 export const Normal = Template.bind({});
 Normal.args = {};
-Normal.decorators = [];

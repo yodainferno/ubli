@@ -1,7 +1,5 @@
 import { StateSchema } from 'app/providers/StoreProvider';
-import { ApiResponse, createIdle } from 'shared/api/types/apiResponse';
-import { Article } from 'entities/Article';
 
-export const getArticleDetailsData = (
-    state: StateSchema,
-): ApiResponse<Article, string> => state.articleDetails?.data ?? createIdle();
+export const getArticleDetailsData = (state: StateSchema) => state.articleDetails?.data;
+export const getArticleDetailsIsLoading = (state: StateSchema) => state.articleDetails?.isLoading || false;
+export const getArticleDetailsError = (state: StateSchema) => state.articleDetails?.error;

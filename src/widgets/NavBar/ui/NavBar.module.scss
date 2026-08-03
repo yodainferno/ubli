@@ -1,19 +1,21 @@
-.NavBar {
-  width: 100%;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  padding: 12px 8px;
-  height: var(--navbar-height);
-  background: var(--inverted-bg-color);
-}
-
-.NavBarItems {
-  display: flex;
-  gap: 8px;
-  margin-left: auto;
+.Navbar {
+    width: 100%;
+    height: var(--navbar-height);
+    background: var(--inverted-bg-color);
+    display: flex;
+    align-items: center;
+    padding: 20px;
 }
 
 .links {
-  margin-left: auto;
+    margin-left: auto;
+}
+
+.mainLink {
+    margin-right: 15px;
+}
+
+.appName {
+    width: var(--sidebar-width);
+    margin-left: 15px;
 }
