@@ -2,6 +2,8 @@
   "Ulbi TV App": "Ulbi TV App",
   "decrement": "decrement",
   "increment": "increment",
+  "reload": "reload",
+  "someError": "someError",
   "throw error": "throw error",
   "Айти": "Айти",
   "Ваш возраст": "Ваш возраст",
