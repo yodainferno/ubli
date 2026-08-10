@@ -9,6 +9,7 @@ import {
 import { useCallback } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getUserAuthData } from 'entities/User';
+import { HStack } from 'shared/ui/Stack/HStack/HStack';
 import cls from './ProfilePageHeader.module.scss';
 
 interface ProfilePageHeaderProps {
@@ -39,41 +40,43 @@ export const ProfilePageHeader = (props: ProfilePageHeaderProps) => {
         dispatch(updateProfileData());
     }, [dispatch]);
 
+    const readonlyButtons = (
+        <Button
+            className={cls.editBtn}
+            theme={ButtonTheme.OUTLINE}
+            onClick={onEdit}
+        >
+            {t('Редактировать')}
+        </Button>
+    );
+
+    const editableButtons = (
+        <HStack gap="8">
+            <Button
+                className={cls.editBtn}
+                theme={ButtonTheme.OUTLINE_RED}
+                onClick={onCancelEdit}
+            >
+                {t('Отменить')}
+            </Button>
+            <Button
+                className={cls.saveBtn}
+                theme={ButtonTheme.OUTLINE}
+                onClick={onSave}
+            >
+                {t('Сохранить')}
+            </Button>
+        </HStack>
+    );
+
     return (
-        <div className={classNames(cls.ProfilePageHeader, {}, [className])}>
+        <HStack max className={classNames(cls.ProfilePageHeader, {}, [className])} gap="8" justify="between">
             <Text title={t('Профиль')} />
-            {canEdit && (
-                <div className={cls.btnsWrapper}>
-                    {readonly
-                        ? (
-                            <Button
-                                className={cls.editBtn}
-                                theme={ButtonTheme.OUTLINE}
-                                onClick={onEdit}
-                            >
-                                {t('Редактировать')}
-                            </Button>
-                        )
-                        : (
-                            <>
-                                <Button
-                                    className={cls.editBtn}
-                                    theme={ButtonTheme.OUTLINE_RED}
-                                    onClick={onCancelEdit}
-                                >
-                                    {t('Отменить')}
-                                </Button>
-                                <Button
-                                    className={cls.saveBtn}
-                                    theme={ButtonTheme.OUTLINE}
-                                    onClick={onSave}
-                                >
-                                    {t('Сохранить')}
-                                </Button>
-                            </>
-                        )}
-                </div>
-            )}
-        </div>
+            {
+                canEdit && (
+                    readonly ? readonlyButtons : editableButtons
+                )
+            }
+        </HStack>
     );
 };
