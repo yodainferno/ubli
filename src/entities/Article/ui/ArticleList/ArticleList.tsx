@@ -1,6 +1,8 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { HTMLAttributeAnchorTarget, memo } from 'react';
+import {
+    HTMLAttributeAnchorTarget, memo, useEffect, useState,
+} from 'react';
 import { Text, TextSize } from 'shared/ui/Text/Text';
 import { List, ListRowProps, WindowScroller } from 'react-virtualized';
 import { PAGE_ID } from 'widgets/Page/Page';
@@ -32,6 +34,11 @@ export const ArticleList = memo((props: ArticleListProps) => {
         target,
     } = props;
     const { t } = useTranslation();
+
+    const [scrollElement, setScrollElement] = useState<Element | null>(null);
+    useEffect(() => {
+        setScrollElement(document.getElementById(PAGE_ID));
+    }, []);
 
     const isBig = view === ArticleView.BIG;
 
@@ -76,9 +83,12 @@ export const ArticleList = memo((props: ArticleListProps) => {
         );
     }
 
+    if (!scrollElement) {
+        return null;
+    }
     return (
         <WindowScroller
-            scrollElement={document.getElementById(PAGE_ID) as Element}
+            scrollElement={scrollElement}
         >
             {({
                 height,
