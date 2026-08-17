@@ -21,7 +21,7 @@ export default {
         ['jest-html-reporters', {
             publicPath: '<rootDir>/reports/unit',
             filename: 'report.html',
-            openReport: true,
+            // openReport: true,
         }],
     ],
     moduleFileExtensions: [
