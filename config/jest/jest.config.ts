@@ -16,6 +16,14 @@ export default {
     coveragePathIgnorePatterns: [
         '\\\\node_modules\\\\',
     ],
+    reporters: [
+        'default',
+        ['jest-html-reporters', {
+            publicPath: '<rootDir>/reports/unit',
+            filename: 'report.html',
+            openReport: true,
+        }],
+    ],
     moduleFileExtensions: [
         'js',
         'jsx',

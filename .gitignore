@@ -2,6 +2,7 @@ node_modules
 /build
 .idea
 package-lock.json
+/reports
 
 *storybook.log
 storybook-static
