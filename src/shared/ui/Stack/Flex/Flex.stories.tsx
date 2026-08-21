@@ -1,5 +1,6 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import { Flex } from './Flex';
 
 export default {
@@ -10,71 +11,95 @@ export default {
     },
 } as ComponentMeta<typeof Flex>;
 
-const Template: ComponentStory<typeof Flex> = (args) => (
-    <div style={{ height: 200, backgroundColor: '#ccf' }}>
-        <Flex {...args} />
-    </div>
-);
-
-const items = (
-    <>
-        <div>A1</div>
-        <div>A2</div>
-        <div style={{ height: 100, width: 100, background: 'red' }}>A3</div>
-    </>
-);
+const Template: ComponentStory<typeof Flex> = (args) => <Flex {...args} />;
 
 export const Row = Template.bind({});
 Row.args = {
-    children: items,
+    children: (
+        <>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+        </>
+    ),
 };
-Row.decorators = [];
 
-//
 export const RowGap4 = Template.bind({});
 RowGap4.args = {
-    children: items,
     gap: '4',
+    children: (
+        <>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+        </>
+    ),
 };
-RowGap4.decorators = [];
-
-//
-
 export const RowGap8 = Template.bind({});
 RowGap8.args = {
-    children: items,
     gap: '8',
+    children: (
+        <>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+        </>
+    ),
 };
-RowGap8.decorators = [];
 
-//
 export const RowGap16 = Template.bind({});
 RowGap16.args = {
-    children: items,
     gap: '16',
+    children: (
+        <>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+        </>
+    ),
 };
-RowGap16.decorators = [];
 
-//
-export const RowGap32 = Template.bind({});
-RowGap32.args = {
-    children: items,
-    gap: '32',
-};
-RowGap32.decorators = [];
-
-//
 export const Column = Template.bind({});
 Column.args = {
-    children: items,
     direction: 'column',
+    children: (
+        <>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+        </>
+    ),
 };
-Column.decorators = [];
 
 export const ColumnGap16 = Template.bind({});
 ColumnGap16.args = {
-    children: items,
-    direction: 'column',
     gap: '16',
+    direction: 'column',
+    children: (
+        <>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+        </>
+    ),
 };
-ColumnGap16.decorators = [];
+
+export const ColumnAlignEnd = Template.bind({});
+ColumnAlignEnd.args = {
+    direction: 'column',
+    align: 'end',
+    children: (
+        <>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+            <div>first</div>
+        </>
+    ),
+};

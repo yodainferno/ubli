@@ -4,7 +4,7 @@ import { Article } from 'entities/Article';
 const recommendationsApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({
         getArticleRecommendationsList: build.query<Article[], number>({
-            query: (limit: number) => ({
+            query: (limit) => ({
                 url: '/articles',
                 params: {
                     _limit: limit,
@@ -12,7 +12,6 @@ const recommendationsApi = rtkApi.injectEndpoints({
             }),
         }),
     }),
-    overrideExisting: false,
 });
 
 export const useArticleRecommendationsList = recommendationsApi.useGetArticleRecommendationsListQuery;

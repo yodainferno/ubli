@@ -1,8 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import {
-    HTMLAttributeAnchorTarget, memo, useEffect, useState,
-} from 'react';
+import { HTMLAttributeAnchorTarget, memo } from 'react';
 import { Text, TextSize } from 'shared/ui/Text/Text';
 import { List, ListRowProps, WindowScroller } from 'react-virtualized';
 import { PAGE_ID } from 'widgets/Page/Page';
@@ -36,11 +34,6 @@ export const ArticleList = memo((props: ArticleListProps) => {
         virtualized = true,
     } = props;
     const { t } = useTranslation();
-
-    const [scrollElement, setScrollElement] = useState<Element | null>(null);
-    useEffect(() => {
-        setScrollElement(document.getElementById(PAGE_ID));
-    }, []);
 
     const isBig = view === ArticleView.BIG;
 
@@ -85,12 +78,10 @@ export const ArticleList = memo((props: ArticleListProps) => {
         );
     }
 
-    if (!scrollElement) {
-        return null;
-    }
     return (
+        // @ts-ignore
         <WindowScroller
-            scrollElement={scrollElement}
+            scrollElement={document.getElementById(PAGE_ID) as Element}
         >
             {({
                 height,
@@ -101,36 +92,36 @@ export const ArticleList = memo((props: ArticleListProps) => {
                 scrollTop,
             }) => (
                 <div
+                    // @ts-ignore
                     ref={registerChild}
                     className={classNames(cls.ArticleList, {}, [className, cls[view]])}
                 >
-                    {
-                        virtualized
-                            ? (
-                                <List
-                                    height={height ?? 700}
-                                    rowCount={rowCount}
-                                    rowHeight={isBig ? 700 : 330}
-                                    rowRenderer={rowRender}
-                                    width={width ? width - 80 : 700}
-                                    autoHeight
-                                    onScroll={onChildScroll}
-                                    isScrolling={isScrolling}
-                                    scrollTop={scrollTop}
+                    {virtualized
+                        ? (
+                            // @ts-ignore
+                            <List
+                                height={height ?? 700}
+                                rowCount={rowCount}
+                                rowHeight={isBig ? 700 : 330}
+                                rowRenderer={rowRender}
+                                width={width ? width - 80 : 700}
+                                autoHeight
+                                onScroll={onChildScroll}
+                                isScrolling={isScrolling}
+                                scrollTop={scrollTop}
+                            />
+                        )
+                        : (
+                            articles.map((item) => (
+                                <ArticleListItem
+                                    article={item}
+                                    view={view}
+                                    target={target}
+                                    key={item.id}
+                                    className={cls.card}
                                 />
-                            )
-                            : (
-                                articles.map((article) => (
-                                    <ArticleListItem
-                                        article={article}
-                                        view={view}
-                                        target={target}
-                                        key={article.id}
-                                        className={cls.card}
-                                    />
-                                ))
-                            )
-                    }
+                            ))
+                        )}
                     {isLoading && getSkeletons(view)}
                 </div>
             )}

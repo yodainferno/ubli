@@ -27,10 +27,11 @@ interface TextProps {
     theme?: TextTheme;
     align?: TextAlign;
     size?: TextSize;
+
     'data-testid'?: string;
 }
 
-type HeaderTagType = 'h1' | 'h2' | 'h3'
+type HeaderTagType = 'h1' | 'h2' | 'h3';
 
 const mapSizeToHeaderTag: Record<TextSize, HeaderTagType> = {
     [TextSize.S]: 'h3',
@@ -61,16 +62,16 @@ export const Text = memo((props: TextProps) => {
         <div className={classNames(cls.Text, mods, [className])}>
             {title && (
                 <HeaderTag
-                    data-testid={`${dataTestId}.Header`}
                     className={cls.title}
+                    data-testid={`${dataTestId}.Header`}
                 >
                     {title}
                 </HeaderTag>
             )}
             {text && (
                 <p
-                    data-testid={`${dataTestId}.Paragraph`}
                     className={cls.text}
+                    data-testid={`${dataTestId}.Paragraph`}
                 >
                     {text}
                 </p>

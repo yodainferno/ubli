@@ -1,9 +1,10 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import { ArticleInfiniteList } from './ArticleInfiniteList';
 
 export default {
-    title: 'todo/ArticleInfiniteList',
+    title: 'pages/ArticlesPage/ArticleInfiniteList',
     component: ArticleInfiniteList,
     argTypes: {
         backgroundColor: { control: 'color' },
@@ -14,4 +15,3 @@ const Template: ComponentStory<typeof ArticleInfiniteList> = (args) => <ArticleI
 
 export const Normal = Template.bind({});
 Normal.args = {};
-Normal.decorators = [];
