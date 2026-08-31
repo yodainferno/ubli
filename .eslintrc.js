@@ -49,14 +49,15 @@ module.exports = {
                 markupOnly: true,
                 ignoreAttribute: [
                     'as',
+                    'role',
                     'data-testid',
                     'to',
                     'target',
                     'justify',
                     'align',
+                    'border',
                     'direction',
                     'gap',
-                    'role',
                 ],
             },
         ],
@@ -69,7 +70,14 @@ module.exports = {
         'no-undef': 'off',
         'react/no-array-index-key': 'off',
         'arrow-body-style': 'off',
-        '@yodainferno/ulbi/path-checker': 'error',
+        '@yodainferno/ulbi/path-checker': ['error', { alias: '@' }],
+        '@yodainferno/ulbi/public-api-imports': [
+            'error',
+            {
+                alias: '@',
+                testFilesPatterns: ['**/*.test.*', '**/*.story.*', '**/StoreDecorator.tsx'],
+            },
+        ],
     },
     globals: {
         __IS_DEV__: true,
