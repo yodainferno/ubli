@@ -23,10 +23,12 @@ module.exports = {
         'i18next',
         'react-hooks',
         '@yodainferno/ulbi',
+        'unused-imports',
     ],
     rules: {
         'react/jsx-indent': [2, 4],
         'react/jsx-indent-props': [2, 4],
+        'unused-imports/no-unused-imports': 'error',
         indent: [2, 4],
         'react/jsx-filename-extension': [
             2,
@@ -71,6 +73,13 @@ module.exports = {
         'react/no-array-index-key': 'off',
         'arrow-body-style': 'off',
         '@yodainferno/ulbi/path-checker': ['error', { alias: '@' }],
+        '@yodainferno/ulbi/layer-imports': [
+            'error',
+            {
+                alias: '@',
+                ignoreImportPatterns: ['**/StoreProvider', '**/testing'],
+            },
+        ],
         '@yodainferno/ulbi/public-api-imports': [
             'error',
             {
